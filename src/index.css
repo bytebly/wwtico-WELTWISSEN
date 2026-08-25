@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-mono: 'IBM Plex Mono', 'Geist Mono', monospace;
+    --font-sans: 'Inter', 'Geist', 'Plus Jakarta Sans', sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #0B211A;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.font-serif-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  letter-spacing: -0.015em;
+}
+
+.font-mono-tag {
+  font-family: 'IBM Plex Mono', 'Geist Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
+.font-sans-body {
+  font-family: 'Inter', 'Geist', 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Industrial thin border utilities matching Figma PDFs */
+.border-dark-line {
+  border-color: #1E4137;
+}
+
+.border-light-line {
+  border-color: #D1C9B7;
+}
+
+.border-gold-accent {
+  border-color: #C68B59;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #081612;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E4137;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C68B59;
+}
+
+/* Hide scrollbar for clean chip scrollers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
