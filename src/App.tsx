@@ -101,7 +101,7 @@ const handleSelectDiscipline = (id: string) => {
       <main className="grow w-full">
         <Routes>
           <Route
-            path="/"
+            path="*"
             element={
               <HomePage
       onNavigate={handleNavigate}
@@ -134,7 +134,7 @@ const handleSelectDiscipline = (id: string) => {
           />
           <Route
             path="/industries"
-            element={<IndustriesPage onSelectSector={() => handleNavigate('contact')} />}
+            element={<IndustriesPage/>}
           />
           <Route
             path="/about"

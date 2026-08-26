@@ -3,11 +3,9 @@ import {
   ALL_INDUSTRIES,
   WHY_US_INDUSTRIES,
   QUALITY_SAFETY_STANDARDS,
-  type IndustrySector,
 } from '../data/websiteData';
 
 interface IndustriesPageProps {
-  onSelectSector?: (sector: IndustrySector) => void;
 }
 
 /* ----------------------------------------------------------------------
@@ -58,9 +56,7 @@ const ShieldCheckSmallIcon: React.FC<IconProps> = ({ className }) => (
 /* Featured-advantage icon lookup (extend as more advantage items are added) */
 const advantageIcons: React.FC<IconProps>[] = [HandshakeIcon, ShieldIcon, LayersIcon];
 
-export const IndustriesPage: React.FC<IndustriesPageProps> = ({
-  onSelectSector,
-}) => {
+export const IndustriesPage: React.FC<IndustriesPageProps> = () => {
   return (
     <div className="flex flex-col items-start w-full min-h-screen bg-[#FAF9F5] text-[#14211D]">
 
