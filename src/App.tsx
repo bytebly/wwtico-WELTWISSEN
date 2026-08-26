@@ -100,18 +100,18 @@ const handleSelectDiscipline = (id: string) => {
       {/* Main Dynamic View — each tab now has a real URL via react-router */}
       <main className="grow w-full">
         <Routes>
-          <Route
-            path="*"
-            element={
-              <HomePage
+         <Route
+  path="/"
+  element={
+    <HomePage
       onNavigate={handleNavigate}
       onOpenQuote={() => handleOpenQuoteModal()}
       onSelectCategory={(cat) => setSelectedEquipment(cat)}
       onSelectSector={() => handleNavigate('industries')}
       onSelectDiscipline={handleSelectDiscipline}
     />
-            }
-          />
+  }
+/>
           <Route
             path="/services"
             element={
