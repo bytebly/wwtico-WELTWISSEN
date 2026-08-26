@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { COMPANY_INFO, FACILITIES } from '../data/websiteData';
 import { ArrowRight, CheckCircle2, AlertCircle, MapPin } from 'lucide-react';
 import { submitToWeb3Forms } from '../utils/submitForm';
-
+import { ChevronDown } from 'lucide-react';
 interface ContactPageProps {
   onSubmitSuccess?: () => void;
 }
@@ -100,7 +100,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSubmitSuccess }) => 
   onClick={scrollToEnquiry}
   className="group flex items-center justify-center gap-3 px-6 sm:px-7 py-3.5 
              bg-[#C6A15B] sm:bg-[#E5DEC9] text-[#0B211A] font-['Geist_Mono',monospace] 
-             font-semibold text-xs uppercase rounded-none sm:rounded tracking-wider 
+             font-semibold text-xs uppercase rounded-none  tracking-wider 
              transition-colors duration-300 w-full sm:w-auto 
              hover:bg-[#C6A15B] hover:border-[#C6A15B]"
 >
@@ -120,7 +120,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSubmitSuccess }) => 
   className="group flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 
              border border-[#E5DEC9] sm:border-white/60 text-[#E5DEC9] 
              font-['Geist_Mono',monospace] font-semibold text-xs uppercase 
-             rounded-none sm:rounded tracking-wider transition-colors duration-300 
+             rounded-none tracking-wider transition-colors duration-300 
              w-full sm:w-auto hover:bg-[#C6A15B] hover:border-[#C6A15B]"
 >
   <span
@@ -181,12 +181,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSubmitSuccess }) => 
             {/* Email Card */}
             <div className="flex flex-col gap-3 p-5 sm:p-8 bg-white border border-[#C0913F]/20 shadow-sm rounded-xl">
               <div className="flex flex-row items-center gap-3 text-xs font-['Geist_Mono',monospace] text-[#C6A15B] tracking-wider">
-                <div className="w-4 h-[1px] bg-[#C6A15B]" />
+                <div className="w-4 h-[1px] bg-[#C6A15B] " />
                 EMAIL
               </div>
               <a
                 href={`mailto:${COMPANY_INFO.email}`}
-                className="font-['Geist',sans-serif] font-semibold text-base sm:text-lg text-[#14211D] hover:text-[#C6A15B] transition-colors break-words"
+                className="font-['Geist',sans-serif] font-semibold text-base sm:text-lg text-[#14211D]"
               >
                 {COMPANY_INFO.email}
               </a>
@@ -200,7 +200,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSubmitSuccess }) => 
               </div>
               <a
                 href={`tel:${COMPANY_INFO.phone}`}
-                className="font-['Geist_Mono',monospace] text-sm sm:text-base text-[#14211D] hover:text-[#C6A15B] transition-colors"
+                className="font-['Geist_Mono',monospace] text-sm sm:text-base text-[#14211D]"
               >
                 {COMPANY_INFO.phone}
               </a>
@@ -224,16 +224,16 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSubmitSuccess }) => 
       {/* Enquiry Section */}
       <section
         id="enquiry-form-section"
-        className="flex flex-col gap-8 sm:gap-10 px-5 sm:px-10 lg:px-20 py-14 sm:py-16 lg:py-24 w-full bg-[#FAF9F5] border-b border-[#D1C9B7]"
+        className="flex flex-col gap-8 sm:gap-10 lg:gap-12 px-5 sm:px-10 lg:px-20 py-14 sm:py-16 lg:py-[120px] w-full bg-[#FAF9F5] border-b border-[#D1C9B7]"
       >
-        <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-8 sm:gap-10">
+        <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-8 sm:gap-10 lg:gap-12">
 
           {/* Section Header */}
           <div className="flex flex-col gap-4">
             <div className="flex flex-row items-center gap-2 sm:gap-3">
               <div className="hidden sm:block w-2 h-2 bg-[#C6A15B] rounded-full" />
               <div className="block sm:hidden w-3 h-px bg-[#C6A15B]" />
-              <span className="font-['Geist_Mono',monospace] font-bold text-xs uppercase tracking-wider text-[#C6A15B]">
+              <span className="font-['Geist_Mono',monospace] font-bold text-xs uppercase text-[#C6A15B]">
                 <span className="hidden sm:inline">Project Enquiry</span>
                 <span className="inline sm:hidden">02 // Project Enquiry</span>
               </span>
@@ -241,7 +241,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSubmitSuccess }) => 
             <h2 className="font-['DM_Serif_Text',serif] font-normal text-[28px] sm:text-[36px] lg:text-[44px] text-[#14211D]">
               Tell us what you're working on.
             </h2>
-            <div className="w-20 sm:w-28 border-t-2 border-[#C6A15B]" />
+            <div className="w-[120px] border-t-2 border-[#C6A15B]" />
           </div>
 
           {/* Form Container */}
@@ -271,7 +271,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSubmitSuccess }) => 
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-6 w-full">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full">
 
                 {/* Honeypot field — hidden from real users, bots tend to fill it in */}
                 <input
@@ -294,7 +294,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSubmitSuccess }) => 
                 )}
 
                 {/* Row 1: Name & Company */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField label="Full Name">
                     <input
                       required
@@ -318,7 +318,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSubmitSuccess }) => 
                 </div>
 
                 {/* Row 2: Email & Phone */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField label="Email Address">
                     <input
                       required
@@ -343,18 +343,21 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSubmitSuccess }) => 
 
                 {/* Row 3: Project Type */}
                 <FormField label="Project Type">
-                  <select
-                    value={formData.service}
-                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className={`${inputClassName} cursor-pointer`}
-                  >
-                    <option value="Construction | Equipment Rental | Logistics | General Enquiry">
-                      Construction | Equipment Rental | Logistics | General Enquiry
-                    </option>
-                    <option value="Industrial Construction">Industrial Construction</option>
-                    <option value="Equipment Rental">Equipment Rental</option>
-                    <option value="Project Logistics">Project Logistics</option>
-                  </select>
+                  <div className="relative w-full">
+                    <select
+                      value={formData.service}
+                      onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                      className={`${inputClassName} appearance-none pr-10 cursor-pointer`}
+                    >
+                      <option value="Construction / Equipment Rental / Logistics / General Enquiry">
+                        Construction / Equipment Rental / Logistics / General Enquiry
+                      </option>
+                      <option value="Industrial Construction">Industrial Construction</option>
+                      <option value="Equipment Rental">Equipment Rental</option>
+                      <option value="Project Logistics">Project Logistics</option>
+                    </select>
+                    <ChevronDown className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 h-[14px] w-[14px] text-[#4A5E59]" />
+                  </div>
                 </FormField>
 
                 {/* Row 4: Requirements */}
@@ -365,24 +368,27 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSubmitSuccess }) => 
                     placeholder="Describe your requirements..."
                     value={formData.details}
                     onChange={(e) => setFormData({ ...formData, details: e.target.value })}
-                    className={`${inputClassName} resize-none h-[100px] sm:h-40 py-3`}
+                    className={`${inputClassName} resize-none h-[100px] sm:h-40`}
                   />
                 </FormField>
 
                 {/* Submit Button */}
-                <button
-  type="submit"
-  disabled={isSubmitting}
-  className="group w-full py-3.5 sm:py-4 bg-[#0E2620] text-white 
-             font-['Geist_Mono',monospace] font-bold text-xs uppercase 
-             tracking-widest border border-[#C0913F]/40 rounded-lg shadow-md 
-             transition-colors duration-300 disabled:cursor-wait 
-             hover:bg-[#C6A15B] hover:border-[#C6A15B]"
->
-  <span className="transition-colors duration-300 group-hover:text-[#06251F]">
-    {isSubmitting ? 'Sending...' : 'SEND ENQUIRY'}
-  </span>
-</button>
+                <div className="pt-4 w-full">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="group w-full py-4 bg-[#0E2620] text-white
+                               font-['Geist_Mono',monospace] font-bold text-sm uppercase
+                               border border-[#C0913F] rounded-lg
+                               shadow-[0px_10px_11px_rgba(0,0,0,0.1)]
+                               transition-colors duration-300 disabled:cursor-wait
+                               hover:bg-[#C6A15B] hover:border-[#C6A15B]"
+                  >
+                    <span className="transition-colors duration-300 group-hover:text-[#06251F]">
+                      {isSubmitting ? 'Sending...' : 'SEND ENQUIRY'}
+                    </span>
+                  </button>
+                </div>
 
               </form>
             )}
@@ -496,7 +502,7 @@ interface FormFieldProps {
 
 const FormField: React.FC<FormFieldProps> = ({ label, children }) => (
   <label className="flex flex-col gap-2 w-full">
-    <span className="font-['Geist_Mono',monospace] text-xs font-semibold text-[#4A5E59] uppercase tracking-wider">
+    <span className="font-['Geist_Mono',monospace] text-[11px] font-normal text-[#4A5E59] uppercase">
       {label}
     </span>
     {children}

@@ -50,7 +50,6 @@ const CategoryIcon: React.FC<{ id: string }> = ({ id }) => {
 
 export const FleetSection: React.FC<FleetSectionProps> = ({
   onViewFleet,
-  onSelectCategory,
 }) => {
   const homeCategoryIds = [
     'excavators',
@@ -119,7 +118,7 @@ export const FleetSection: React.FC<FleetSectionProps> = ({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.4, delay: index * 0.08, ease: 'easeOut' }}
-              onClick={() => onSelectCategory(item)}
+              onClick={onViewFleet}
               aria-label={`View ${item.name} details`}
               className="group box-border flex h-auto min-h-[220px] w-full flex-col justify-between rounded-[16px] border border-[#D1C9B7] bg-[#F5EFE2] p-6 text-left transition-all duration-300 hover:-translate-y-2 hover:bg-[#0E2620] hover:border-[#C0913F] hover:shadow-lg sm:min-h-[240px] sm:p-7 lg:rounded-[12px] lg:shadow-[0px_10px_24px_-10px_rgba(0,0,0,0.101961)] xl:h-[256px] xl:shrink-0 xl:pt-8 xl:px-6 xl:pb-6 min-[1440px]:w-[400px]"
             >

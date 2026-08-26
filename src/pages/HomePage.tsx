@@ -13,13 +13,15 @@ interface HomePageProps {
   onOpenQuote: () => void;
   onSelectCategory: (category: FleetCategory) => void;
   onSelectSector: (sector: IndustrySector) => void;
+  onSelectDiscipline: (id: string) => void; // NEW
 }
 
 export const HomePage: React.FC<HomePageProps> = ({
   onNavigate,
   onOpenQuote,
   onSelectCategory,
-  onSelectSector
+  onSelectSector,
+  onSelectDiscipline, // NEW
 }) => {
   return (
     <div className="w-full">
@@ -31,13 +33,11 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       {/* 01 // WHAT WE DO */}
       <DivisionsSection 
-        onSelectDiscipline={() => onNavigate('services')} 
+        onSelectDiscipline={onSelectDiscipline} 
       />
 
       {/* 02 // BUILT ON PRECISION */}
-      <AboutSection 
-        onLearnApproach={() => onNavigate('about')}
-      />
+      <AboutSection/>
 
       {/* 03 // FLEET & EQUIPMENT — hidden on mobile per mobile spec, unchanged on tablet/desktop */}
       <div className="max-sm:hidden">
@@ -62,11 +62,11 @@ export const HomePage: React.FC<HomePageProps> = ({
 
       {/* 06 // GET IN TOUCH */}
       <CtaSection 
-  sectionNumber="06"
-  hideTalkToTeamMobile={true}
-  onTalkToTeam={() => onNavigate('contact')}
-  onGetQuote={onOpenQuote}
-/>
+        sectionNumber="06"
+        hideTalkToTeamMobile={true}
+        onTalkToTeam={() => onNavigate('contact')}
+        onGetQuote={onOpenQuote}
+      />
     </div>
   );
 };

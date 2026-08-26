@@ -351,9 +351,9 @@ export const FleetPage: React.FC<FleetPageProps> = ({
                   onClick={() => onSelectCategory(item)}
                   className="group flex flex-col gap-3 p-5 w-full lg:flex-[256_256_0%] lg:min-w-0 min-h-[260px] sm:min-h-[314px] bg-[#FAF9F5] border border-[#D1C9B7] shadow-md rounded-xl text-left transition-all duration-200 hover:bg-[#0E2620] hover:border-[#C6A15B] hover:-translate-y-0.5 hover:shadow-[0px_10px_22px_-10px_rgba(0,0,0,0.12)]"
                 >
-                  <div className="flex items-center justify-center w-12 h-12 sm:w-[52px] sm:h-[52px] bg-[#FAF6EE] border border-[#D1C9B7] rounded group-hover:bg-transparent group-hover:border-transparent transition-colors">
-                    {getCategoryIcon(item)}
-                  </div>
+                  <div className="flex items-center justify-center w-12 h-12 sm:w-[52px] sm:h-[52px] bg-[#FAF6EE] rounded group-hover:bg-transparent group-hover:border-transparent transition-colors">
+  {getCategoryIcon(item)}
+</div>
                   <div className="flex flex-col gap-1">
                     <h3 className="font-['DM_Serif_Text',serif] text-lg text-[#0E2620] group-hover:text-white transition-colors">
                       {item.name}
@@ -385,9 +385,9 @@ export const FleetPage: React.FC<FleetPageProps> = ({
                   onClick={() => onSelectCategory(item)}
                   className="group flex flex-col gap-3 p-5 w-full min-h-[240px] sm:min-h-[280px] bg-[#FAF9F5] border border-[#D1C9B7] shadow-md rounded-xl text-left transition-all duration-200 hover:bg-[#0E2620] hover:border-[#C6A15B] hover:-translate-y-0.5 hover:shadow-[0px_10px_22px_-10px_rgba(0,0,0,0.12)]"
                 >
-                  <div className="flex items-center justify-center w-12 h-12 sm:w-[52px] sm:h-[52px] bg-[#FAF6EE] border border-[#D1C9B7] rounded group-hover:bg-transparent group-hover:border-transparent transition-colors">
-                    {getCategoryIcon(item)}
-                  </div>
+                  <div className="flex items-center justify-center w-12 h-12 sm:w-[52px] sm:h-[52px] bg-[#FAF6EE] rounded group-hover:bg-transparent group-hover:border-transparent transition-colors">
+  {getCategoryIcon(item)}
+</div>
                   <div className="flex flex-col gap-1">
                     <h3 className="font-['DM_Serif_Text',serif] text-lg text-[#0E2620] group-hover:text-white transition-colors">
                       {item.name}

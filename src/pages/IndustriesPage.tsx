@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import {
   ALL_INDUSTRIES,
   WHY_US_INDUSTRIES,
@@ -72,7 +71,7 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({
           <nav aria-label="Breadcrumb" className="flex flex-row items-center gap-2 text-[10px] sm:text-xs font-['Geist_Mono',monospace]">
             <span className="text-[#4A5E59] uppercase">Home</span>
             <span className="text-[#C6A15B]">//</span>
-            <span className="text-[#14211D] uppercase font-semibold">Industries</span>
+            <span className="text-[#14211D] uppercase font-normal">Industries</span>
           </nav>
 
           {/* Section Label */}
@@ -81,13 +80,13 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({
             <span className="sm:hidden font-['Geist_Mono',monospace] font-normal text-[10px] uppercase tracking-wider text-[#C6A15B]">
               01 // Industries We Serve
             </span>
-            <span className="hidden sm:inline font-['Geist_Mono',monospace] font-semibold text-xs uppercase tracking-wider text-[#C6A15B]">
+            <span className="hidden sm:inline font-['Geist_Mono',monospace] font- text-xs uppercase tracking-wider text-[#C6A15B]">
               Industries We Serve
             </span>
           </div>
 
           {/* Title */}
-          <h1 className="font-['DM_Serif_Text',serif] font-semibold text-[32px] sm:text-[48px] lg:text-[64px] leading-[110%] text-[#14211D]">
+          <h1 className="font-['DM_Serif_Text',serif] font-normal text-[32px] sm:text-[48px] lg:text-[64px] leading-[110%] text-[#14211D]">
             Industries we serve.
           </h1>
 
@@ -105,21 +104,16 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({
             const formattedIndex = `IND.${String(index + 1).padStart(2, '0')}`;
 
             return (
-              <motion.div
+              <div
                 key={industry.id}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: Math.min(index, 3) * 0.05 }}
-                onClick={() => onSelectSector?.(industry)}
-                className="group flex flex-col w-full bg-[#0E2620] border border-[#C0913F]/20 rounded-xl overflow-hidden cursor-pointer shadow-md hover:border-[#C0913F]/50 transition-all duration-300"
+                className="flex flex-col w-full bg-[#0E2620] border border-[#C0913F]/20 rounded-xl overflow-hidden shadow-md"
               >
                 {/* Image */}
                 <div className="w-full h-[180px] sm:h-[240px] lg:h-[260px] bg-gray-400 overflow-hidden relative">
                   <img
                     src={industry.image}
                     alt={industry.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0B211A]/40 via-transparent to-transparent" />
                 </div>
@@ -129,14 +123,14 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({
                   <div className="flex flex-row justify-between text-[11px] font-['Geist_Mono',monospace] text-[#C0913F]">
                     <span>{formattedIndex}</span>
                   </div>
-                  <h3 className="font-['DM_Serif_Text',serif] text-[22px] sm:text-2xl leading-[120%] sm:leading-[115%] text-white group-hover:text-[#E5DEC9] transition-colors">
+                  <h3 className="font-['DM_Serif_Text',serif] text-[22px] sm:text-2xl leading-[120%] sm:leading-[115%] text-white">
                     {industry.title}
                   </h3>
                   <p className="font-['Geist',sans-serif] text-[13px] sm:text-sm leading-[150%] sm:leading-relaxed text-[#F5EFE2] opacity-90 line-clamp-3">
                     {industry.description}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

@@ -55,6 +55,11 @@ export function App() {
 
   const handleNavigate = handleNavigateTab;
 
+  // NEW — navigates straight to the matching discipline section on the Services page
+const handleSelectDiscipline = (id: string) => {
+  navigate(`/services#${id}`);
+};
+
   const handleOpenQuoteModal = (service?: string, equipment?: string) => {
     if (service) setQuoteInitialService(service);
     if (equipment) setQuoteInitialEquipment(equipment);
@@ -65,6 +70,8 @@ export function App() {
     setSelectedEquipment(null);
     handleOpenQuoteModal('Equipment Rental', categoryName);
   };
+
+  
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0B211A] text-white selection:bg-[#C68B59] selection:text-[#0B211A] relative">
@@ -97,11 +104,12 @@ export function App() {
             path="/"
             element={
               <HomePage
-                onNavigate={handleNavigate}
-                onOpenQuote={() => handleOpenQuoteModal()}
-                onSelectCategory={(cat) => setSelectedEquipment(cat)}
-                onSelectSector={() => handleNavigate('industries')}
-              />
+      onNavigate={handleNavigate}
+      onOpenQuote={() => handleOpenQuoteModal()}
+      onSelectCategory={(cat) => setSelectedEquipment(cat)}
+      onSelectSector={() => handleNavigate('industries')}
+      onSelectDiscipline={handleSelectDiscipline}
+    />
             }
           />
           <Route

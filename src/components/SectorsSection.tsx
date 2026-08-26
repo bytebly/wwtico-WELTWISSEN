@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { 
   Building2, 
   Droplet, 
@@ -25,7 +24,7 @@ const sectorIcons: Record<string, LucideIcon> = {
   SEC_06: Landmark,
 };
 
-export const SectorsSection: React.FC<SectorsSectionProps> = ({ onSelectSector }) => {
+export const SectorsSection: React.FC<SectorsSectionProps> = () => {
   return (
     <section className="w-full bg-[#FAF9F5] py-16 md:py-[120px] px-6 md:px-12 lg:px-[80px] border-b border-[#D1C9B7]">
       <div className="max-w-[1280px] mx-auto flex flex-col gap-12 md:gap-[64px]">
@@ -53,18 +52,13 @@ export const SectorsSection: React.FC<SectorsSectionProps> = ({ onSelectSector }
 
         {/* 6 Industry Sector Cards Grid (3 columns x 2 rows) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]">
-          {HOME_SECTORS.map((sector, index) => {
+          {HOME_SECTORS.map((sector) => {
             const IconComponent = sectorIcons[sector.secTag] || Layers;
 
             return (
-              <motion.div
+              <div
                 key={sector.id}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-                onClick={() => onSelectSector && onSelectSector(sector)}
-                className="bg-[#F5EFE2] border border-[#D1C9B7] rounded-[16px] p-[20px] flex flex-col justify-between h-auto min-h-[343px] gap-[12px] hover:shadow-lg hover:border-[#C0913F] transition-all duration-300 group cursor-pointer"
+                className="bg-[#F5EFE2] border border-[#D1C9B7] rounded-[16px] p-[20px] flex flex-col justify-between h-auto min-h-[343px] gap-[12px]"
               >
                 {/* Content Top */}
                 <div className="flex flex-col gap-[12px]">
@@ -77,7 +71,7 @@ export const SectorsSection: React.FC<SectorsSectionProps> = ({ onSelectSector }
                   </div>
 
                   {/* Sector Title */}
-                  <h3 className="font-['DM_Serif_Text',serif] text-[#0E2620] text-[22px] leading-[115%] font-normal  transition-colors">
+                  <h3 className="font-['DM_Serif_Text',serif] text-[#0E2620] text-[22px] leading-[115%] font-normal">
                     {sector.title}
                   </h3>
 
@@ -92,10 +86,10 @@ export const SectorsSection: React.FC<SectorsSectionProps> = ({ onSelectSector }
                   <img 
                     src={sector.image} 
                     alt={sector.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover"
                   />
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

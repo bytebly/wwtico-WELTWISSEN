@@ -3,13 +3,11 @@ import { motion } from 'framer-motion';
 import { COMPANY_INFO } from '../data/websiteData';
 // import { ArrowRight } from 'lucide-react';
 
-interface AboutSectionProps {
-  onLearnApproach?: () => void;
-}
+// interface AboutSectionProps {
+//   onLearnApproach?: () => void;
+// }
 
-export const AboutSection: React.FC<AboutSectionProps> = ({
-  onLearnApproach,
-}) => {
+export const AboutSection: React.FC = () => {
   return (
     <section className="w-full bg-[#FAF9F5]">
 
@@ -25,16 +23,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           overflow-hidden
           border-b
           border-[#D1C9B7]
-          bg-gradient-to-r
-          from-[#FAF9F5]
-          to-[#F5EFE2]
+          bg-[#FAF9F5]
           px-6
           py-20
           sm:px-8
           lg:px-20
           lg:py-[120px]
-          max-sm:bg-none
-          max-sm:bg-[#F5EFE2]
           max-sm:px-5
           max-sm:py-14
         "
@@ -51,7 +45,6 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             inset-0
             z-0
             bg-[#FFFFFF]
-            opacity-[0.12]
           "
         />
 
@@ -297,7 +290,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               rounded-[16px]
               border
               border-[#C0913F]
-              bg-[#F5EFE2]
+              bg-[#FFFCF5]
               p-8
               shadow-[0px_10px_24px_-10px_rgba(192,145,63,0.10),0px_18px_40px_-14px_rgba(0,0,0,0.07)]
               sm:p-12
@@ -307,7 +300,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               max-sm:gap-4
               max-sm:rounded-[12px]
               max-sm:border-[#C6A15B]
-              max-sm:bg-[#FAF9F5]
+              max-sm:bg-[#FFFCF5]
               max-sm:p-6
               max-sm:shadow-none
             "
@@ -317,21 +310,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
             <div className="h-8 w-8 shrink-0 text-[#C0913F] max-sm:h-6 max-sm:w-6">
 
-              <svg
-  width="32"
-  height="32"
-  viewBox="0 0 32 32"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
-  className="h-full w-full"
->
-  <path
-    d="M4 5V27M10 6H28M10 16H28M10 26H28"
-    stroke="currentColor"
-    strokeWidth="3.5"
-    strokeLinecap="round"
-  />
-</svg>
+              <img
+                src="https://www.figma.com/api/mcp/asset/ed51ff6a-9c51-4da7-b2bd-0abf9c90e934.svg"
+                alt=""
+                className="block h-full w-full"
+              />
 
             </div>
 
@@ -360,34 +343,29 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
             <div className="mt-auto flex flex-col gap-[6px]">
 
-              <button
-                type="button"
-                onClick={onLearnApproach}
-                className="
-                  flex
-                  w-fit
-                  items-center
-                  gap-2
-                  font-['Geist_Mono',monospace]
-                  text-[12px]
-                  font-bold
-                  uppercase
-                  leading-4
-                  text-[#C0913F]
-                  transition-colors
-                  duration-200
-                  hover:text-[#A0732A]
-                  max-sm:text-[10px]
-                  max-sm:leading-[13px]
-                "
-              >
-                <span>OUR APPROACH</span>
+              <span
+  className="
+    flex
+    w-fit
+    items-center
+    gap-2
+    font-['Geist_Mono',monospace]
+    text-[12px]
+    font-bold
+    uppercase
+    leading-4
+    text-[#C0913F]
+    max-sm:text-[10px]
+    max-sm:leading-[13px]
+  "
+>
+  <span>OUR APPROACH</span>
 
-                {/* <ArrowRight
-                  size={14}
-                  strokeWidth={1.8}
-                /> */}
-              </button>
+  {/* <ArrowRight
+    size={14}
+    strokeWidth={1.8}
+  /> */}
+</span>
 
             </div>
 

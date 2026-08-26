@@ -9,47 +9,30 @@ import {
 } from '../data/websiteData';
 import { CtaSection } from '../components/CtaSection';
 import { 
-   Eye, Target, CheckCircle2, 
+   Eye, Target, 
   Truck, Layers, LayoutGrid, MapPin, 
   ArrowRight
 } from 'lucide-react';
-
-import bellIconImg from '../assets/bell.png';
 
 interface AboutPageProps {
   onOpenQuote?: () => void;
   onTalkToTeam?: () => void;
 }
 
-// Custom SVG Icons matching the exact geometric shapes in your images
+// 8 value icon images served from /public/aboutImage.
+// Indices 0-3 are used on mobile, indices 4-7 are used on tablet/desktop,
+// in the same order as ABOUT_VALUES (Integrity, Customer Focus, Quality, Safety).
+const VALUE_ICONS = [
+  '/aboutImage/darkshield.png', //mobile
+  '/aboutImage/darkleaf.png',   //mobile
+  '/aboutImage/mobquality.png',  //mobile
+  '/aboutImage/darkbell.png',   //mobile
+  '/aboutImage/shield.png',  
+  '/aboutImage/lightleaf.png',
+  '/aboutImage/tickDesk.png',
+  '/aboutImage/bellDesk.png',
+];
 
-// 1. Shield Icon (Flat-topped shield with pointed base)
-const ShieldIcon = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 22C6.5 20.5 3 15.5 3 9.5V4.5L12 2L21 4.5V9.5C21 15.5 17.5 20.5 12 22Z" />
-  </svg>
-);
-
-// 2. Leaf Icon (Single teardrop/leaf shape curving up to top-right)
-const LeafIcon = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M21 3C21 3 10 3 5 8C0 13 3 20 10 20C17 20 21 11 21 3Z" />
-  </svg>
-);
-
-// 3. Bell / Dome Helmet Icon (Flat wide base, rounded dome body, small circular top knob)
-// Exact match for the Bell / Hardhat icon in image_c19e22.png
-const BellIcon = ({ className = 'w-full h-full' }: { className?: string }) => (
-  <img 
-    src={bellIconImg} 
-    alt="Bell icon" 
-    className={`w-full h-full object-cover block ${className}`} 
-  />
-);
-
-// Value icons array updated with exact vector matches
-const VALUE_ICONS = [ShieldIcon, LeafIcon, CheckCircle2, BellIcon];
-//changed
 // Icon assigned per stat card, matching the Figma order: Equipment, Divisions, Industries, HQ
 const STAT_ICONS = [Truck, Layers, LayoutGrid, MapPin];
 
@@ -213,7 +196,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
       {/* 02 // OUR JOURNEY (badge reads 03 on mobile) */}
        <section className="py-14 px-5 sm:py-20 sm:px-6 md:py-28 md:px-12 lg:!py-[120px] lg:!px-20 border-y border-[#D1C9B7] bg-white">
   <div className="max-w-[1280px] mx-auto flex flex-col gap-10 sm:gap-12 lg:!gap-20">
- 
+
     {/* Header */}
     <div className="flex flex-col gap-3 lg:!gap-4">
       <div className="flex items-center gap-2 lg:!gap-3">
@@ -230,7 +213,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
           </span>
         </span>
       </div>
- 
+
       <h2 className="font-['DM_Serif_Text',serif] text-[#14211D] text-[28px] leading-[38px] sm:text-4xl lg:!text-[44px] sm:leading-[115%] lg:!leading-[115%]">
         Built one phase at a time.
       </h2>
@@ -238,8 +221,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
         From equipment rental to an integrated industrial services partner.
       </p>
     </div>
- 
-    {/* Mobile: connected vertical timeline per CSS spec */}
+
+    {/* Mobile: connected vertical timeline per CSS spec — unchanged */}
     <div className="flex flex-col gap-8 sm:hidden">
       {ABOUT_MILESTONES.map((milestone, idx) => (
         <motion.div
@@ -272,53 +255,116 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
         </motion.div>
       ))}
     </div>
- 
-    {/* Tablet: keep card grid; Desktop (lg+): horizontal connected timeline per CSS — UNCHANGED */}
+
+    {/* Tablet: card grid; Desktop (lg+): horizontal timeline with traveling gold + trailing lines */}
     <div className="hidden sm:grid lg:!flex lg:!flex-row lg:!items-start grid-cols-2 lg:grid-cols-none gap-4 sm:gap-6 lg:!gap-0">
-      {ABOUT_MILESTONES.map((milestone, idx) => (
-        <motion.div
-          key={idx}
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: idx * 0.1 }}
-          className={`bg-[#F5EFE2] lg:!bg-transparent border border-[#D1C9B7] lg:!border-none rounded-lg lg:!rounded-none p-5 sm:p-6 lg:!p-0 flex flex-col justify-between lg:!justify-start gap-4 sm:gap-6 lg:!gap-6 shadow-sm lg:!shadow-none hover:border-[#C68B59] lg:hover:!border-none transition-colors lg:!flex-1 ${
-            idx !== ABOUT_MILESTONES.length - 1 ? 'lg:!pr-8' : ''
-          }`}
-        >
-          {/* Timeline connector row — desktop only */}
-          <div className="hidden lg:!flex items-center w-full">
-            <span
-              className={`h-5 w-5 shrink-0 rounded-full border-4 border-[#E5DEC9] ${
-                idx === 0 ? 'bg-[#C6A15B]' : 'bg-[#0B211A]'
-              }`}
-            />
-            {idx !== ABOUT_MILESTONES.length - 1 && (
-              <span className="lg:!h-px h-0.5 flex-1 bg-[#D1C9B7]" />
-            )}
-          </div>
- 
-          <div className="flex flex-col gap-2 sm:gap-3 lg:!gap-3">
-            <span className="font-['Geist_Mono',monospace] font-semibold text-[#C68B59] lg:!text-[#C6A15B] text-[11px] sm:text-xs uppercase tracking-wider lg:!normal-case lg:!tracking-normal">
-              {milestone.phase}
-            </span>
-            <h3 className="font-['DM_Serif_Text',serif] text-[#0B211A] lg:!text-[#14211D] text-xl sm:text-2xl lg:!text-[22px] lg:!leading-normal">
-              {milestone.title}
-            </h3>
-            <p className="font-sans-body text-[#4A5E59] text-xs sm:text-sm lg:!text-sm lg:!leading-[150%]">
-              {milestone.description}
-            </p>
-          </div>
-        </motion.div>
-      ))}
+      {(() => {
+        const N = ABOUT_MILESTONES.length;
+
+        // Circle-pop → line-draw → circle-pop ... timing.
+        const CIRCLE_DURATION = 0.25;
+        const LINE_DURATION = 0.35;
+        const STEP = CIRCLE_DURATION + LINE_DURATION; // one full circle+line beat
+
+        // Total time for all N circles + N trailing lines (last line included).
+        const SEQUENCE_END = N * STEP;
+
+        // After the full draw-in finishes, the non-last gold circles settle back to black.
+        const FLIP_BUFFER = 0.15;
+        const FLIP_DURATION = 0.4;
+        const FLIP_START = SEQUENCE_END + FLIP_BUFFER;
+        const FLIP_END = FLIP_START + FLIP_DURATION;
+
+        const GOLD = '#C6A15B';
+        const BLACK = '#0B211A';
+
+        return ABOUT_MILESTONES.map((milestone, idx) => {
+          const circleDelay = idx * STEP;   // also the moment the incoming line "touches" this circle
+          const lineDelay = circleDelay + CIRCLE_DURATION;
+          const isFirst = idx === 0;
+          const isLast = idx === N - 1;
+
+          // Build a color timeline for this circle, all expressed as fractions of FLIP_END
+          // (so every circle's backgroundColor animation runs on one shared clock from t=0).
+          const touchRatio = circleDelay / FLIP_END;
+          const flipStartRatio = FLIP_START / FLIP_END;
+
+          let colors, times;
+          if (isLast) {
+            // Black until the line reaches it, then gold — and stays gold.
+            colors = [BLACK, GOLD];
+            times = [0, touchRatio];
+          } else if (isFirst) {
+            // Gold immediately (nothing to wait for), then settles black once sequence completes.
+            colors = [GOLD, GOLD, BLACK];
+            times = [0, flipStartRatio, 1];
+          } else {
+            // Black → gold the instant the line touches it → black once the sequence completes.
+            colors = [BLACK, GOLD, GOLD, BLACK];
+            times = [0, touchRatio, flipStartRatio, 1];
+          }
+
+          return (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              className="bg-[#F5EFE2] lg:!bg-transparent border border-[#D1C9B7] lg:!border-none rounded-lg lg:!rounded-none p-5 sm:p-6 lg:!p-0 flex flex-col justify-between lg:!justify-start gap-4 sm:gap-6 lg:!gap-6 shadow-sm lg:!shadow-none hover:border-[#C68B59] lg:hover:!border-none transition-colors lg:!flex-1 lg:!pr-8"
+            >
+              {/* Timeline connector row — desktop/laptop only */}
+              <div className="hidden lg:!flex items-center w-full">
+                <motion.span
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{
+                    scale: 1,
+                    opacity: 1,
+                    backgroundColor: colors,
+                  }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{
+                    scale: { duration: CIRCLE_DURATION, delay: circleDelay, ease: 'easeOut' },
+                    opacity: { duration: CIRCLE_DURATION, delay: circleDelay, ease: 'easeOut' },
+                    backgroundColor: { duration: FLIP_END, times, ease: 'easeInOut' },
+                  }}
+                  className="h-5 w-5 shrink-0 rounded-full border-4 border-[#E5DEC9]"
+                />
+
+                {/* Every circle gets a trailing line, including the last */}
+                <motion.span
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ duration: LINE_DURATION, delay: lineDelay, ease: 'easeInOut' }}
+                  style={{ transformOrigin: 'left' }}
+                  className="lg:!h-px h-0.5 flex-1 bg-[#D1C9B7]"
+                />
+              </div>
+
+              <div className="flex flex-col gap-2 sm:gap-3 lg:!gap-3">
+                <span className="font-['Geist_Mono',monospace] font-semibold text-[#C68B59] lg:!text-[#C6A15B] text-[11px] sm:text-xs uppercase tracking-wider lg:!normal-case lg:!tracking-normal">
+                  {milestone.phase}
+                </span>
+                <h3 className="font-['DM_Serif_Text',serif] text-[#0B211A] lg:!text-[#14211D] text-xl sm:text-2xl lg:!text-[22px] lg:!leading-normal">
+                  {milestone.title}
+                </h3>
+                <p className="font-sans-body text-[#4A5E59] text-xs sm:text-sm lg:!text-sm lg:!leading-[150%]">
+                  {milestone.description}
+                </p>
+              </div>
+            </motion.div>
+          );
+        });
+      })()}
     </div>
- 
+
   </div>
 </section>
  
 
       {/* 03 // OUR VALUES (badge reads 04 on mobile) */}
-      <section className="py-14 sm:py-20 md:py-28 px-5 sm:px-6 md:px-12 lg:!px-20 lg:!py-[120px] border-b border-[#D1C9B7] bg-[#F5EFE2]">
+      <section className="py-14 sm:py-20 md:py-28 px-5 sm:px-6 md:px-12 lg:!px-20 lg:!py-[120px] border-b border-[#D1C9B7] bg-[#F5EFE2] lg:!bg-white">
   <div className="max-w-[1280px] mx-auto flex flex-col gap-8 sm:gap-12 lg:!gap-16">
 
     {/* Header */}
@@ -343,15 +389,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
         </span>
       </div>
 
-      <h2 className="font-['DM_Serif_Text',serif] text-[#0B211A] lg:!text-[#14211D] text-[28px] xs:text-3xl sm:text-4xl lg:!text-[56px] leading-[135%] sm:leading-[115%] lg:!leading-[110%]">
+      <h2 className="font-['DM_Serif_Text',serif] text-[#0B211A] lg:!text-[#14211D] text-[28px] xs:text-3xl sm:text-4xl lg:!text-[44px] leading-[135%] sm:leading-[115%] lg:!leading-[110%]">
         What drives every decision.
       </h2>
     </div>
 
-    {/* Mobile: simple icon + title + description stack — UNCHANGED */}
+    {/* Mobile: simple icon + title + description stack — uses icons 0-3 */}
     <div className="flex flex-col gap-5 sm:hidden">
       {ABOUT_VALUES.map((val, i) => {
-        const Icon = VALUE_ICONS[i % VALUE_ICONS.length];
+        const iconSrc = VALUE_ICONS[i];
         return (
           <motion.div
             key={i}
@@ -371,7 +417,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
                     : 'bg-[#F5EFE2] border border-[#C6A15B] text-[#C6A15B]'
                 }`}
               >
-                <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
+                <img src={iconSrc} alt="" className="h-full w-full object-contain" />
               </div>
               <h3
                 className={`font-['DM_Serif_Text',serif] text-[22px] leading-[30px] ${
@@ -393,10 +439,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
       })}
     </div>
 
-    {/* Tablet only: bento grid with badges + quotes — capped at md, hidden on lg (desktop uses the bento below) */}
+    {/* Tablet only: bento grid with badges + quotes — uses icons 4-7 — capped at md, hidden on lg (desktop uses the bento below) */}
     <div className="hidden sm:grid lg:!hidden md:grid-cols-2 gap-4 sm:gap-6">
       {ABOUT_VALUES.map((val, i) => {
-        const Icon = VALUE_ICONS[i % VALUE_ICONS.length];
+        const iconSrc = VALUE_ICONS[i + 4];
         return (
           <motion.div
             key={i}
@@ -418,7 +464,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
                       : 'bg-[#F5EFE2] border border-[#C6A15B] text-[#C6A15B]'
                   }`}
                 >
-                  <Icon className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={2} />
+                  <img src={iconSrc} alt="" className="w-full h-full object-contain" />
                 </div>
                 <span className={`w-1.5 self-stretch rounded-full ${val.isDark ? 'bg-transparent' : 'bg-[#C6A15B]'}`} />
               </div>
@@ -460,133 +506,146 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
       })}
     </div>
 
-    {/* Desktop (lg+): asymmetric bento per CSS spec — Integrity(560/dark) + Customer Focus(696/light) | Quality(560/light) + Safety(696/dark) */}
-    {/* Desktop (lg+): asymmetric bento per CSS spec — Integrity(560/dark) + Customer Focus(696/light) | Quality(560/light) + Safety(696/dark) */}
-{/* Desktop (lg+): asymmetric bento per CSS spec — Integrity(560/dark) + Customer Focus(696/light) | Quality(560/light) + Safety(696/dark) */}
-<div className="hidden lg:!flex lg:!flex-col lg:!gap-6">
-  {[0, 1].map((row) => (
-    <div key={row} className="lg:!flex lg:!flex-row lg:!gap-6 lg:!items-stretch">
-      {ABOUT_VALUES.slice(row * 2, row * 2 + 2).map((val, j) => {
-        const idx = row * 2 + j;
-        const Icon = VALUE_ICONS[idx % VALUE_ICONS.length];
-        const isNarrow = j === 0; // 560px card
-        const isDark = val.isDark;
-        const hasTopBadge = idx === 0;
-        const hasDotRow = idx === 1 || idx === 2;
-        const hasQuote = idx === 1 || idx === 3;
+    {/* Desktop (lg+): asymmetric bento per CSS spec — uses icons 4-7 — Integrity(560/dark) + Customer Focus(696/light) | Quality(560/light) + Safety(696/dark) */}
+    <div className="hidden lg:!flex lg:!flex-col lg:!gap-6">
+      {[0, 1].map((row) => (
+        <div key={row} className="lg:!flex lg:!flex-row lg:!gap-6 lg:!items-stretch">
+          {ABOUT_VALUES.slice(row * 2, row * 2 + 2).map((val, j) => {
+            const idx = row * 2 + j;
+            const iconSrc = VALUE_ICONS[idx + 4];
+            const isNarrow = j === 0; // 560px card
+            const isDark = val.isDark;
+            const hasTopBadge = idx === 0;
+            const hasDotRow = idx === 1 || idx === 2;
+            const hasQuote = idx === 1 || idx === 3;
 
-        const dotRowBlock = hasDotRow && (
-          <div className="lg:!flex lg:!flex-col lg:!gap-4 lg:!relative lg:!z-10">
-            <span className="lg:!h-px lg:!bg-[#D1C9B7] lg:!opacity-60" />
-            <div className="lg:!flex lg:!items-center lg:!justify-between">
-              <div className="lg:!flex lg:!items-center lg:!gap-1.5">
-                <span className="lg:!w-1.5 lg:!h-1.5 lg:!rounded-full lg:!bg-[#C6A15B]" />
-                <span className="lg:!w-1.5 lg:!h-1.5 lg:!rounded-full lg:!bg-[#C6A15B] lg:!opacity-35" />
-                <span className="lg:!w-1.5 lg:!h-1.5 lg:!rounded-full lg:!bg-[#C6A15B] lg:!opacity-35" />
-              </div>
-              <span className="font-['Geist_Mono',monospace] lg:!text-[11px] lg:!font-bold lg:!uppercase text-[#C6A15B] lg:!opacity-90">
-                {val.badge}
-              </span>
-            </div>
-          </div>
-        );
+            // Only Integrity (idx 0) gets the large solid-gold icon treatment,
+            // the top hero-strip, and the 16px subhead. Safety (idx 3) is dark
+            // but still uses the same small/light icon style as the light cards.
+            const isIntegrity = isNarrow && isDark;
 
-        const quoteBlock = hasQuote && val.quote && (
-          <div className="lg:!flex lg:!items-center lg:!gap-3 lg:!relative lg:!z-10">
-            <span className="lg:!w-[3px] lg:!h-11 lg:!rounded-full lg:!bg-[#C6A15B]" />
-            <p className={`font-['DM_Serif_Text',serif] italic lg:!text-[18px] lg:!leading-[140%] flex-1 ${isDark ? 'text-[#FAF9F5] lg:!opacity-95' : 'text-[#14211D] lg:!opacity-95'}`}>
-              {val.quote}
-            </p>
-          </div>
-        );
-
-        return (
-          <div
-            key={idx}
-            style={{ flex: isNarrow ? '560 560 0%' : '696 696 0%', minWidth: 0 }}
-            className={`lg:!relative lg:!overflow-hidden lg:!rounded-2xl lg:!border lg:!box-border ${
-              isDark ? 'lg:!border-[#C6A15B] lg:!bg-[#0E2620]' : 'lg:!border-[#D1C9B7] lg:!bg-[#FAF9F5]'
-            } ${isDark ? 'lg:!p-8' : 'lg:!p-6'} lg:!flex lg:!flex-col ${isDark ? 'lg:!gap-4' : 'lg:!gap-10'}`}
-          >
-            {isDark && (
-              <span className="lg:!absolute lg:!top-0 lg:!left-0 lg:!right-0 lg:!h-[6px] lg:!bg-[#C6A15B] lg:!opacity-35 lg:!z-0" />
-            )}
-
-            <div className="lg:!flex lg:!flex-col lg:!gap-4 lg:!relative lg:!z-10">
-              {/* icon row */}
-              <div className="lg:!flex lg:!items-center lg:!justify-between">
-                {isDark ? (
-                  <div className="lg:!w-14 lg:!h-14 lg:!rounded-2xl lg:!bg-[#C6A15B] lg:!flex lg:!items-center lg:!justify-center">
-                    <Icon className="lg:!w-[26px] lg:!h-[26px] text-[#0E2620]" strokeWidth={2} />
+            const dotRowBlock = hasDotRow && (
+              <div className="lg:!flex lg:!flex-col lg:!gap-4 lg:!relative lg:!z-10">
+                <span className="lg:!h-px lg:!bg-[#D1C9B7] lg:!opacity-60" />
+                <div className="lg:!flex lg:!items-center lg:!justify-between">
+                  <div className="lg:!flex lg:!items-center lg:!gap-1.5">
+                    <span className="lg:!w-1.5 lg:!h-1.5 lg:!rounded-full lg:!bg-[#C6A15B]" />
+                    <span className="lg:!w-1.5 lg:!h-1.5 lg:!rounded-full lg:!bg-[#C6A15B] lg:!opacity-35" />
+                    <span className="lg:!w-1.5 lg:!h-1.5 lg:!rounded-full lg:!bg-[#C6A15B] lg:!opacity-35" />
                   </div>
-                ) : (
-                  <div className="lg:!w-11 lg:!h-11 lg:!rounded-xl lg:!border lg:!border-[#C6A15B] lg:!bg-[#F5EFE2] lg:!flex lg:!items-center lg:!justify-center">
-                    <Icon className="lg:!w-5 lg:!h-5 text-[#C6A15B]" strokeWidth={2} />
-                  </div>
-                )}
-
-                {hasTopBadge ? (
-                  <span className="font-['Geist_Mono',monospace] lg:!text-[12px] lg:!font-bold lg:!uppercase lg:!px-2.5 lg:!py-1.5 lg:!rounded-full lg:!bg-[#F5EFE2] text-[#0E2620]">
+                  <span className="font-['Geist_Mono',monospace] lg:!text-[11px] lg:!font-bold lg:!uppercase text-[#C6A15B] lg:!opacity-90">
                     {val.badge}
                   </span>
+                </div>
+              </div>
+            );
+
+            const quoteBlock = hasQuote && val.quote && (
+              <div className="lg:!flex lg:!items-center lg:!gap-3 lg:!relative lg:!z-10">
+                <span className="lg:!w-[3px] lg:!h-11 lg:!rounded-full lg:!bg-[#C6A15B]" />
+                <p className={`font-['DM_Serif_Text',serif] italic lg:!text-[18px] lg:!leading-[140%] flex-1 ${isDark ? 'text-[#FAF9F5] lg:!opacity-95' : 'text-[#14211D] lg:!opacity-95'}`}>
+                  {val.quote}
+                </p>
+              </div>
+            );
+
+            return (
+              <div
+                key={idx}
+                style={{ flex: isNarrow ? '560 560 0%' : '696 696 0%', minWidth: 0 }}
+                className={`lg:!relative lg:!overflow-hidden lg:!rounded-2xl lg:!border lg:!box-border ${
+                  isDark ? 'lg:!border-[#C6A15B] lg:!bg-[#0E2620]' : 'lg:!border-[#D1C9B7] lg:!bg-[#FAF9F5]'
+                } ${isDark ? 'lg:!p-8' : 'lg:!p-6'} lg:!flex lg:!flex-col ${isDark ? 'lg:!gap-4' : 'lg:!gap-10'}`}
+              >
+                {/* Top hero-strip: Integrity only per spec */}
+                {isIntegrity && (
+                  <span className="lg:!absolute lg:!top-0 lg:!left-0 lg:!right-0 lg:!h-[6px] lg:!bg-[#C6A15B] lg:!opacity-35 lg:!z-0" />
+                )}
+
+                <div className="lg:!flex lg:!flex-col lg:!gap-4 lg:!relative lg:!z-10">
+                  {/* icon row */}
+                  <div className="lg:!flex lg:!items-center lg:!justify-between">
+                    {isIntegrity ? (
+                      <div className="lg:!w-14 lg:!h-14 lg:!rounded-2xl lg:!bg-[#C6A15B] lg:!flex lg:!items-center lg:!justify-center">
+                        <img src={iconSrc} alt="" className="lg:!w-full lg:!h-full object-contain" />
+                      </div>
+                    ) : (
+                      <div className="lg:!w-11 lg:!h-11 lg:!rounded-xl lg:!border lg:!border-[#C6A15B] lg:!bg-[#F5EFE2] lg:!flex lg:!items-center lg:!justify-center">
+                        <img src={iconSrc} alt="" className="lg:!w-full lg:!h-full object-contain" />
+                      </div>
+                    )}
+
+                    {hasTopBadge ? (
+                      <span className="font-['Geist_Mono',monospace] lg:!text-[12px] lg:!font-bold lg:!uppercase lg:!px-2.5 lg:!py-1.5 lg:!rounded-full lg:!bg-[#F5EFE2] text-[#0E2620]">
+                        {val.badge}
+                      </span>
+                    ) : (
+                      <span className="lg:!w-1.5 lg:!self-stretch lg:!rounded-full lg:!bg-[#C6A15B]" />
+                    )}
+                  </div>
+
+                  {/* copy */}
+                  <div className={`lg:!flex lg:!flex-col ${isIntegrity ? 'lg:!gap-3' : 'lg:!gap-2.5'}`}>
+                    <span className="font-['Geist_Mono',monospace] lg:!text-[12px] lg:!font-bold lg:!uppercase text-[#C6A15B]">
+                      {val.number}
+                    </span>
+                    <h3
+                      className={`font-['DM_Serif_Text',serif] lg:!leading-[120%] ${
+                        isIntegrity ? 'lg:!text-[36px] lg:!leading-[115%]' : 'lg:!text-[22px]'
+                      } ${isDark ? 'text-[#FAF9F5]' : 'text-[#14211D]'}`}
+                    >
+                      {val.title}
+                    </h3>
+                    <p
+                      className={`font-['DM_Serif_Text',serif] lg:!leading-[160%] ${
+                        isIntegrity ? 'lg:!text-base' : 'lg:!text-sm'
+                      } ${isDark ? 'text-[#FAF9F5] lg:!opacity-90' : 'text-[#14211D] lg:!opacity-85'}`}
+                    >
+                      {val.subhead}
+                    </p>
+                  </div>
+
+                  {/* supporting */}
+                  <div className="lg:!flex lg:!flex-col lg:!gap-2 lg:!pt-2">
+                    <span className={`font-['Geist_Mono',monospace] lg:!text-[11px] lg:!font-bold lg:!uppercase ${isDark ? 'text-[#FAF9F5] lg:!opacity-75' : 'text-[#14211D] lg:!opacity-60'}`}>
+                      {val.label}
+                    </span>
+                    <p
+                      className={`font-['DM_Serif_Text',serif] lg:!leading-[160%] ${
+                        isDark ? 'lg:!text-sm text-[#FAF9F5] lg:!opacity-85' : 'lg:!text-[13px] text-[#14211D] lg:!opacity-85'
+                      }`}
+                    >
+                      {val.text}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Safety (dark, wide) keeps the quote as a flat sibling at the card's own 16px rhythm.
+                    Customer Focus (light, wide) groups the divider/dots and quote together at 40px
+                    from the main copy block, with 16px between them internally. Quality has only
+                    the divider/dots group. */}
+                {hasDotRow && hasQuote ? (
+                  <div className="lg:!flex lg:!flex-col lg:!gap-4 lg:!relative lg:!z-10">
+                    {dotRowBlock}
+                    {quoteBlock}
+                  </div>
                 ) : (
-                  <span className="lg:!w-1.5 lg:!self-stretch lg:!rounded-full lg:!bg-[#C6A15B]" />
+                  <>
+                    {dotRowBlock}
+                    {quoteBlock}
+                  </>
+                )}
+
+                {/* Bottom rule: both dark cards per spec (hero-rule on Integrity, safety-rule on Safety) */}
+                {isDark && (
+                  <span className="lg:!absolute lg:!bottom-0 lg:!left-0 lg:!right-0 lg:!h-[2px] lg:!bg-[#C6A15B] lg:!opacity-25 lg:!z-0" />
                 )}
               </div>
-
-              {/* copy */}
-              <div className={`lg:!flex lg:!flex-col ${isNarrow && isDark ? 'lg:!gap-3' : 'lg:!gap-2.5'}`}>
-                <span className="font-['Geist_Mono',monospace] lg:!text-[12px] lg:!font-bold lg:!uppercase text-[#C6A15B]">
-                  {val.number}
-                </span>
-                <h3
-                  className={`font-['DM_Serif_Text',serif] lg:!leading-[120%] ${
-                    isNarrow && isDark ? 'lg:!text-[36px] lg:!leading-[115%]' : 'lg:!text-[22px]'
-                  } ${isDark ? 'text-[#FAF9F5]' : 'text-[#14211D]'}`}
-                >
-                  {val.title}
-                </h3>
-                <p className={`font-['DM_Serif_Text',serif] lg:!text-sm lg:!leading-[160%] ${isDark ? 'text-[#FAF9F5] lg:!opacity-90' : 'text-[#14211D] lg:!opacity-85'}`}>
-                  {val.subhead}
-                </p>
-              </div>
-
-              {/* supporting */}
-              <div className="lg:!flex lg:!flex-col lg:!gap-2 lg:!pt-2">
-                <span className={`font-['Geist_Mono',monospace] lg:!text-[11px] lg:!font-bold lg:!uppercase ${isDark ? 'text-[#FAF9F5] lg:!opacity-75' : 'text-[#14211D] lg:!opacity-60'}`}>
-                  {val.label}
-                </span>
-                <p className={`font-['DM_Serif_Text',serif] lg:!text-[13px] lg:!leading-[160%] ${isDark ? 'text-[#FAF9F5] lg:!opacity-85' : 'text-[#14211D] lg:!opacity-85'}`}>
-                  {val.text}
-                </p>
-              </div>
-            </div>
-
-            {/* Safety (dark, wide) keeps the quote as a flat sibling at the card's own 16px rhythm.
-                Customer Focus (light, wide) groups the divider/dots and quote together at 40px
-                from the main copy block, with 16px between them internally. Quality has only
-                the divider/dots group. */}
-            {hasDotRow && hasQuote ? (
-              <div className="lg:!flex lg:!flex-col lg:!gap-4 lg:!relative lg:!z-10">
-                {dotRowBlock}
-                {quoteBlock}
-              </div>
-            ) : (
-              <>
-                {dotRowBlock}
-                {quoteBlock}
-              </>
-            )}
-
-            {isDark && (
-              <span className="lg:!absolute lg:!bottom-0 lg:!left-0 lg:!right-0 lg:!h-[2px] lg:!bg-[#C6A15B] lg:!opacity-25 lg:!z-0" />
-            )}
-          </div>
-        );
-      })}
+            );
+          })}
+        </div>
+      ))}
     </div>
-  ))}
-</div>
 
   </div>
 </section>

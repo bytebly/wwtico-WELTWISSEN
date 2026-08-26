@@ -73,16 +73,16 @@ export const CtaSection: React.FC<CtaSectionProps> = ({
           
           {/* Request a Quote Button */}
           <button
-            type="button"
-            onClick={onGetQuote}
-            className="flex h-[44px] w-full items-center justify-center gap-[8px] whitespace-nowrap bg-[#C6A15B] p-[14px] font-['Geist_Mono',monospace] text-[12px] font-semibold uppercase leading-[16px] text-[#0B211A] transition-all duration-300 hover:bg-[#0E2620] hover:border-[#C0913F] hover:text-[#F5EFE2] active:scale-[0.98] sm:h-[45px] sm:w-auto sm:border sm:border-[#C6A15B] sm:px-[28px] sm:text-[13px] sm:leading-[17px]"
-          >
-            <span className="whitespace-nowrap">REQUEST A QUOTE</span>
-            <ArrowRight 
-              className="h-[14px] w-[14px] shrink-0 text-[#0B211A] transition-colors duration-300 hover:text-[#F5EFE2]" 
-              strokeWidth={2.5} 
-            />
-          </button>
+  type="button"
+  onClick={onGetQuote}
+  className="group flex h-[44px] w-full items-center justify-center gap-[8px] whitespace-nowrap bg-[#C6A15B] p-[14px] font-['Geist_Mono',monospace] text-[12px] font-semibold uppercase leading-[16px] text-[#0B211A] transition-all duration-300 hover:bg-[#0E2620] hover:border-[#C0913F] hover:text-[#F5EFE2] active:scale-[0.98] sm:h-[45px] sm:w-auto sm:border sm:border-[#C6A15B] sm:px-[28px] sm:text-[13px] sm:leading-[17px]"
+>
+  <span className="whitespace-nowrap">REQUEST A QUOTE</span>
+  <ArrowRight
+    className="h-[14px] w-[14px] shrink-0 text-[#0B211A] transition-colors duration-300 group-hover:text-[#F5EFE2]"
+    strokeWidth={2.5}
+  />
+</button>
 
           {/* Talk To Our Team Button */}
           {showTalkToTeam && (
