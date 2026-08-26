@@ -56,9 +56,9 @@ export function App() {
   const handleNavigate = handleNavigateTab;
 
   // NEW — navigates straight to the matching discipline section on the Services page
-const handleSelectDiscipline = (id: string) => {
-  navigate(`/services#${id}`);
-};
+  const handleSelectDiscipline = (id: string) => {
+    navigate(`/services#${id}`);
+  };
 
   const handleOpenQuoteModal = (service?: string, equipment?: string) => {
     if (service) setQuoteInitialService(service);
@@ -70,8 +70,6 @@ const handleSelectDiscipline = (id: string) => {
     setSelectedEquipment(null);
     handleOpenQuoteModal('Equipment Rental', categoryName);
   };
-
-  
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0B211A] text-white selection:bg-[#C68B59] selection:text-[#0B211A] relative">
@@ -91,8 +89,8 @@ const handleSelectDiscipline = (id: string) => {
       </Helmet>
 
       {/* Top Fixed Header Navbar */}
-      <Navbar 
-        activeTab={activeTab} 
+      <Navbar
+        activeTab={activeTab}
         setActiveTab={handleNavigate}
         onOpenQuoteModal={() => handleOpenQuoteModal()}
       />
@@ -100,18 +98,18 @@ const handleSelectDiscipline = (id: string) => {
       {/* Main Dynamic View — each tab now has a real URL via react-router */}
       <main className="grow w-full">
         <Routes>
-         <Route
-  path="/"
-  element={
-    <HomePage
-      onNavigate={handleNavigate}
-      onOpenQuote={() => handleOpenQuoteModal()}
-      onSelectCategory={(cat) => setSelectedEquipment(cat)}
-      onSelectSector={() => handleNavigate('industries')}
-      onSelectDiscipline={handleSelectDiscipline}
-    />
-  }
-/>
+          <Route
+            path="/"
+            element={
+              <HomePage
+                onNavigate={handleNavigate}
+                onOpenQuote={() => handleOpenQuoteModal()}
+                onSelectCategory={(cat) => setSelectedEquipment(cat)}
+                onSelectSector={() => handleNavigate('industries')}
+                onSelectDiscipline={handleSelectDiscipline}
+              />
+            }
+          />
           <Route
             path="/services"
             element={
@@ -134,7 +132,7 @@ const handleSelectDiscipline = (id: string) => {
           />
           <Route
             path="/industries"
-            element={<IndustriesPage/>}
+            element={<IndustriesPage />}
           />
           <Route
             path="/about"
@@ -165,6 +163,7 @@ const handleSelectDiscipline = (id: string) => {
                 onOpenQuote={() => handleOpenQuoteModal()}
                 onSelectCategory={(cat) => setSelectedEquipment(cat)}
                 onSelectSector={() => handleNavigate('industries')}
+                onSelectDiscipline={handleSelectDiscipline}
               />
             }
           />
@@ -178,7 +177,7 @@ const handleSelectDiscipline = (id: string) => {
       <Chatbot onOpenQuoteModal={handleOpenQuoteModal} />
 
       {/* ONE Single Reusable QuoteModal */}
-      <QuoteModal 
+      <QuoteModal
         isOpen={isQuoteModalOpen}
         onClose={() => setIsQuoteModalOpen(false)}
         initialService={quoteInitialService}
@@ -197,7 +196,7 @@ const handleSelectDiscipline = (id: string) => {
       />
 
       {/* Success Confirmation Overlay */}
-      <ContactSuccessOverlay 
+      <ContactSuccessOverlay
         isOpen={isSuccessOverlayOpen}
         onClose={() => setIsSuccessOverlayOpen(false)}
         refCode={successRefCode}
