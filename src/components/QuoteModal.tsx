@@ -169,12 +169,12 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.25 }}
-            className="relative w-full max-w-2xl bg-[#FAF9F5] border border-[#C68B59] rounded-2xl shadow-2xl overflow-hidden z-10 my-auto"
+            className="relative w-full max-w-2xl bg-[#FAF9F5] border border-[#C0913F] rounded-2xl shadow-2xl overflow-hidden z-10 my-auto"
           >
             {/* Modal Header */}
             <div className="bg-[#0B211A] text-white p-4 sm:p-6 border-b border-[#1E4137] flex items-start justify-between">
               <div className="flex flex-col gap-1 pr-4 sm:pr-6">
-                <span className="font-mono-tag font-semibold text-[#C68B59] text-xs uppercase tracking-wider">
+                <span className="font-mono-tag font-semibold text-[#C0913F] text-xs uppercase tracking-wider">
                   WELTWISSEN // KSA
                 </span>
                 <h3 className="font-serif-title text-2xl sm:text-3xl text-white leading-tight">
@@ -384,23 +384,34 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({
                 >
                   Cancel
                 </button>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full sm:w-auto bg-[#C68B59] hover:bg-[#b07849] disabled:opacity-50 text-[#0B211A] font-mono-tag font-semibold text-xs uppercase py-3.5 px-8 rounded-xs outline outline-1 outline-[#C68B59] -outline-offset-1 flex items-center justify-center gap-2 transition-all cursor-pointer"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Submitting...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Request a Quote</span>
-                      <CheckCircle2 className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
+               <button
+  type="submit"
+  disabled={isSubmitting}
+  className="group flex h-[44px] w-full sm:h-[45px] sm:w-auto items-center justify-center gap-[8px] 
+             whitespace-nowrap bg-[#C6A15B] sm:px-[28px] px-[14px] 
+             font-['Geist_Mono',monospace] text-[12px] sm:text-[13px] font-semibold uppercase 
+             leading-[16px] sm:leading-[17px] text-[#0B211A] rounded-xs 
+             transition-all duration-300 cursor-pointer 
+             hover:bg-[#0E2620] hover:border-[#C0913F] hover:text-[#F5EFE2] 
+             active:scale-[0.98] disabled:opacity-50 disabled:cursor-wait sm:border sm:border-[#C6A15B]"
+>
+  {isSubmitting ? (
+    <>
+      <Loader2 className="h-[14px] w-[14px] animate-spin text-[#0B211A] group-hover:text-[#F5EFE2]" />
+      <span className="whitespace-nowrap">Submitting...</span>
+    </>
+  ) : (
+    <>
+      <span className="whitespace-nowrap">Request a Quote</span>
+      <CheckCircle2
+        className="h-[14px] w-[14px] shrink-0 text-[#0B211A] transition-colors duration-300 group-hover:text-[#F5EFE2]"
+        strokeWidth={2.5}
+      />
+    </>
+  )}
+</button>
+
+
               </div>
 
             </form>
