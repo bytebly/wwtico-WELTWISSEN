@@ -113,7 +113,7 @@ export const COMPANY_INFO: CompanyInfo = {
   address: "Al Khobar, Eastern Province, Kingdom of Saudi Arabia",
   registeredOfficeAddress: "Office 0127, Building 2004, Road 1627, Block 316, Al-Hidd Industrial Area, Kingdom of Bahrain",
   phone: "+966 13 888 2026",
-  email: "info@weltwissen.com",
+  email: "info@wwtico.com",
   crNumber: "2051224890",
   vatNumber: "310455829100003",
   heroHeadline: "Precision-built for the Kingdom's hardest sites.",

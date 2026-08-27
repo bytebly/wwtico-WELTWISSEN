@@ -32,7 +32,7 @@ VERIFIED WELTWISSEN KNOWLEDGE BASE:
 - Slogan: "World knowledge. Grounded in delivery."
 - Founded: 2018 in Al Khobar, Kingdom of Saudi Arabia.
 - Headquarters Address: King Abdulaziz Street, Al Khobar, Eastern Province, Kingdom of Saudi Arabia.
-- Email: info@weltwissen.com.sa
+- Email: info@wwtico.com.sa
 - Phone: +966 13 888 2026
 - Facilities: Laydown yard in Al Khobar, Industrial Fabrication shop, 50+ units Fleet Depot in Eastern Province.
 - Working Hours: Sunday - Thursday: 8:00 AM - 5:00 PM (AST).
@@ -102,7 +102,7 @@ function getVerifiedFallbackResponse(inputMessage) {
 
   if (query.includes('contact') || query.includes('phone') || query.includes('email') || query.includes('location') || query.includes('address') || query.includes('where') || query.includes('office')) {
     return {
-      reply: "WELTWISSEN Company Headquarters:\n• Address: King Abdulaziz Street, Al Khobar, Kingdom of Saudi Arabia\n• Email: info@weltwissen.com.sa\n• Phone: +966 13 888 2026\n• Working Hours: Sunday - Thursday, 8:00 AM - 5:00 PM AST\n\nOur equipment yards and fabrication facilities are located in the Eastern Province."
+      reply: "WELTWISSEN Company Headquarters:\n• Address: King Abdulaziz Street, Al Khobar, Kingdom of Saudi Arabia\n• Email: info@wwtico.com.sa\n• Phone: +966 13 888 2026\n• Working Hours: Sunday - Thursday, 8:00 AM - 5:00 PM AST\n\nOur equipment yards and fabrication facilities are located in the Eastern Province."
     };
   }
 
@@ -181,7 +181,7 @@ apiRouter.post('/chat', async (req, res) => {
   } catch (err) {
     console.error('Error handling /api/chat:', err);
     res.status(500).json({
-      reply: "I experienced a temporary communication issue. Please try again or contact our Al Khobar team directly at info@weltwissen.com.sa."
+      reply: "I experienced a temporary communication issue. Please try again or contact our Al Khobar team directly at info@wwtico.com.sa."
     });
   }
 });

@@ -119,10 +119,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick }) => {
 
               <div className="flex flex-col items-start gap-[8px] pt-1 font-['Geist_Mono',monospace] text-[13px] sm:text-[14px] leading-[18px] break-all sm:break-normal">
                 <a
-                  href={`mailto:${COMPANY_INFO?.email || 'info@weltwissen.com'}`}
+                  href={`mailto:${COMPANY_INFO?.email || 'info@wwtico.com'}`}
                   className="hover:text-[#C6A15B] transition-colors"
                 >
-                  E: {COMPANY_INFO?.email || 'info@weltwissen.com'}
+                  E: {COMPANY_INFO?.email || 'info@wwtico.com'}
                 </a>
                 <a
                   href={`tel:${COMPANY_INFO?.phone || '+966138882026'}`}
