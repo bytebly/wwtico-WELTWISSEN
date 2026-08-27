@@ -146,7 +146,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onSubmitSuccess }) => 
             className="w-full lg:w-1/2 h-[200px] sm:h-[320px] lg:h-[400px] rounded-lg overflow-hidden bg-[#123329] border border-[#1D4137] shadow-xl"
           >
             <img
-              src="/weltwissen/contact_hero.png"
+              src="/weltwissen/contact_hero_new.jpeg"
               alt="WELTWISSEN Industrial Site"
               className="w-full h-full object-cover"
             />

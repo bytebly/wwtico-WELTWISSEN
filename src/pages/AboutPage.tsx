@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { 
   COMPANY_INFO, 
   ABOUT_MILESTONES, 
@@ -18,6 +18,8 @@ interface AboutPageProps {
   onOpenQuote?: () => void;
   onTalkToTeam?: () => void;
 }
+
+
 
 // 8 value icon images served from /public/aboutImage.
 // Indices 0-3 are used on mobile, indices 4-7 are used on tablet/desktop,
@@ -194,7 +196,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
       </section>
 
       {/* 02 // OUR JOURNEY (badge reads 03 on mobile) */}
-       <section className="py-14 px-5 sm:py-20 sm:px-6 md:py-28 md:px-12 lg:!py-[120px] lg:!px-20 border-y border-[#D1C9B7] bg-white">
+     <section className="py-14 px-5 sm:py-20 sm:px-6 md:py-28 md:px-12 lg:!py-[120px] lg:!px-20 border-y border-[#D1C9B7] bg-white">
   <div className="max-w-[1280px] mx-auto flex flex-col gap-10 sm:gap-12 lg:!gap-20">
 
     {/* Header */}
@@ -222,38 +224,72 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
       </p>
     </div>
 
-    {/* Mobile: connected vertical timeline per CSS spec — unchanged */}
+    {/* Mobile: connected vertical timeline — text synced to its own circle pop */}
     <div className="flex flex-col gap-8 sm:hidden">
-      {ABOUT_MILESTONES.map((milestone, idx) => (
-        <motion.div
-          key={idx}
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.35, delay: idx * 0.08 }}
-          className="flex flex-col gap-4"
-        >
-          <div className="flex items-center gap-3">
-            <span
-              className={`h-[18px] w-[18px] shrink-0 rounded-full border-[3px] border-[#E5DEC9] ${
-                idx === 0 ? 'bg-[#C6A15B]' : 'bg-[#0B211A]'
-              }`}
-            />
-            <span className="h-px flex-1 bg-[#D1C9B7]" />
-          </div>
-          <div className="flex flex-col gap-2">
-            <span className="font-['Geist_Mono',monospace] font-bold text-[#C6A15B] text-[11px] leading-[14px]">
-              {milestone.phase}
-            </span>
-            <h3 className="font-['DM_Serif_Text',serif] text-[#14211D] text-[18px] leading-[25px]">
-              {milestone.title}
-            </h3>
-            <p className="font-sans-body text-[#4A5E59] text-[13px] leading-[140%]">
-              {milestone.description}
-            </p>
-          </div>
-        </motion.div>
-      ))}
+      {ABOUT_MILESTONES.map((milestone, idx) => {
+        const circleDelay = idx * 0.15; // stagger each circle pop down the list
+        const textDelay = circleDelay + 0.05; // text follows a beat behind its circle
+
+        const textVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, delay: textDelay, ease: 'easeOut' },
+  },
+};
+
+        return (
+          // Single viewport trigger on the whole card — circle, line, and text
+          // all key off this one "is this card in view" check, so nothing can
+          // fire out of sync with the others.
+          <motion.div
+            key={idx}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.6 }}
+            className="flex flex-col gap-4"
+          >
+            <div className="flex items-center gap-3">
+              <motion.span
+                variants={{
+                  hidden: { scale: 0, opacity: 0 },
+                  visible: {
+                    scale: 1,
+                    opacity: 1,
+                    transition: { duration: 0.25, delay: circleDelay, ease: 'easeOut' },
+                  },
+                }}
+                className={`h-[18px] w-[18px] shrink-0 rounded-full border-[3px] border-[#E5DEC9] ${
+                  idx === 0 ? 'bg-[#C6A15B]' : 'bg-[#0B211A]'
+                }`}
+              />
+              <motion.span
+                variants={{
+                  hidden: { scaleX: 0 },
+                  visible: {
+                    scaleX: 1,
+                    transition: { duration: 0.3, delay: circleDelay + 0.2, ease: 'easeInOut' },
+                  },
+                }}
+                style={{ transformOrigin: 'left' }}
+                className="h-px flex-1 bg-[#D1C9B7]"
+              />
+            </div>
+            <motion.div variants={textVariants} className="flex flex-col gap-2">
+              <span className="font-['Geist_Mono',monospace] font-bold text-[#C6A15B] text-[11px] leading-[14px]">
+                {milestone.phase}
+              </span>
+              <h3 className="font-['DM_Serif_Text',serif] text-[#14211D] text-[18px] leading-[25px]">
+                {milestone.title}
+              </h3>
+              <p className="font-sans-body text-[#4A5E59] text-[13px] leading-[140%]">
+                {milestone.description}
+              </p>
+            </motion.div>
+          </motion.div>
+        );
+      })}
     </div>
 
     {/* Tablet: card grid; Desktop (lg+): horizontal timeline with traveling gold + trailing lines */}
@@ -281,6 +317,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
         return ABOUT_MILESTONES.map((milestone, idx) => {
           const circleDelay = idx * STEP;   // also the moment the incoming line "touches" this circle
           const lineDelay = circleDelay + CIRCLE_DURATION;
+          // Text now appears the instant this card's own circle pops in, not on an unrelated idx*0.1 clock.
+          const textDelay = circleDelay + 0.08;
           const isFirst = idx === 0;
           const isLast = idx === N - 1;
 
@@ -305,24 +343,28 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
           }
 
           return (
+            // Single viewport trigger on the whole card. Circle, line, and text
+            // are all children driven off this one "is this card in view" check
+            // via variants, so they can never fire out of sync with each other
+            // even if the card straddles the viewport boundary oddly.
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.6 }}
               className="bg-[#F5EFE2] lg:!bg-transparent border border-[#D1C9B7] lg:!border-none rounded-lg lg:!rounded-none p-5 sm:p-6 lg:!p-0 flex flex-col justify-between lg:!justify-start gap-4 sm:gap-6 lg:!gap-6 shadow-sm lg:!shadow-none hover:border-[#C68B59] lg:hover:!border-none transition-colors lg:!flex-1 lg:!pr-8"
             >
               {/* Timeline connector row — desktop/laptop only */}
               <div className="hidden lg:!flex items-center w-full">
                 <motion.span
-                  initial={{ scale: 0, opacity: 0 }}
-                  whileInView={{
-                    scale: 1,
-                    opacity: 1,
-                    backgroundColor: colors,
+                  variants={{
+                    hidden: { scale: 0, opacity: 0 },
+                    visible: {
+                      scale: 1,
+                      opacity: 1,
+                      backgroundColor: colors,
+                    },
                   }}
-                  viewport={{ once: true, amount: 0.6 }}
                   transition={{
                     scale: { duration: CIRCLE_DURATION, delay: circleDelay, ease: 'easeOut' },
                     opacity: { duration: CIRCLE_DURATION, delay: circleDelay, ease: 'easeOut' },
@@ -333,16 +375,30 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
 
                 {/* Every circle gets a trailing line, including the last */}
                 <motion.span
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true, amount: 0.6 }}
-                  transition={{ duration: LINE_DURATION, delay: lineDelay, ease: 'easeInOut' }}
+                  variants={{
+                    hidden: { scaleX: 0 },
+                    visible: {
+                      scaleX: 1,
+                      transition: { duration: LINE_DURATION, delay: lineDelay, ease: 'easeInOut' },
+                    },
+                  }}
                   style={{ transformOrigin: 'left' }}
                   className="lg:!h-px h-0.5 flex-1 bg-[#D1C9B7]"
                 />
               </div>
 
-              <div className="flex flex-col gap-2 sm:gap-3 lg:!gap-3">
+              {/* Text block — fades in the instant this card's own circle pops (or on mount for tablet grid, first beat) */}
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 15 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.35, delay: textDelay, ease: 'easeOut' },
+                  },
+                }}
+                className="flex flex-col gap-2 sm:gap-3 lg:!gap-3"
+              >
                 <span className="font-['Geist_Mono',monospace] font-semibold text-[#C68B59] lg:!text-[#C6A15B] text-[11px] sm:text-xs uppercase tracking-wider lg:!normal-case lg:!tracking-normal">
                   {milestone.phase}
                 </span>
@@ -352,7 +408,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
                 <p className="font-sans-body text-[#4A5E59] text-xs sm:text-sm lg:!text-sm lg:!leading-[150%]">
                   {milestone.description}
                 </p>
-              </div>
+              </motion.div>
             </motion.div>
           );
         });
