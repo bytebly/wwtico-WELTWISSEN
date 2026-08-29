@@ -9,7 +9,7 @@ interface ChatbotProps {
 }
 
 // WhatsApp Business number, digits only (country code + number, no "+", no spaces, no leading 0).
-// Currently mapped from the Al Khobar HQ line: +966 13 888 2026
+// Currently mapped from the Al Khobar HQ line: +966 13 882 2946
 const WHATSAPP_NUMBER = '966564512515';
 
 // Default greeting sent when someone taps the button.

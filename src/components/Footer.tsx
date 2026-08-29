@@ -37,7 +37,7 @@ const LinkedinIcon: React.FC<{ className?: string }> = ({ className }) => (
 const SOCIAL_LINKS = [
   {
     name: 'Instagram',
-    href: COMPANY_INFO?.social?.instagram || 'https://instagram.com/weltwissen',
+    href: COMPANY_INFO?.social?.instagram || 'https://www.instagram.com/weltwissen.sa?utm_source=qr',
     Icon: InstagramIcon,
   },
   {
@@ -70,16 +70,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick }) => {
           {/* Left Column: Logo & Tagline (515px max) */}
           <div className="w-full lg:max-w-[515px] flex flex-col items-start gap-[24px] sm:gap-[32px]">
             {/* Logo Lockup */}
-            <div className="flex items-center gap-[11px]">
-              <img
-                src="/weltwissen/weltwissen-mark.png"
-                alt="WELTWISSEN Logo"
-                className="h-[38px] w-[36px] sm:h-[44px] sm:w-[42px] object-contain shrink-0"
-              />
-              <span className="font-['DM_Serif_Text',serif] text-[22px] sm:text-[26px] leading-[130%] sm:leading-[36px] tracking-[0.04em] text-[#FAF9F5]">
-                WELTWISSEN
-              </span>
-            </div>
+            <div className="flex items-center h-[38px] sm:h-[44px]">
+  <img
+    src="/weltwissen/weltwissen-mark.png"
+    alt="WELTWISSEN Logo"
+    className="h-full w-auto object-contain shrink-0"
+  />
+</div>
 
             {/* Description */}
             <p className="font-['Geist',sans-serif] font-normal text-[14px] sm:text-[15px] leading-[160%] text-[#E5DEC9] max-w-[420px] lg:max-w-none">
@@ -128,7 +125,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick }) => {
                   href={`tel:${COMPANY_INFO?.phone || '+966138882026'}`}
                   className="hover:text-[#C6A15B] transition-colors"
                 >
-                  T: {COMPANY_INFO?.phone || '+966 13 888 2026'}
+                  T: {COMPANY_INFO?.phone || '+966 13 882 2946'}
                 </a>
               </div>
             </div>

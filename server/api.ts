@@ -31,10 +31,10 @@ CRITICAL INSTRUCTIONS & BOUNDARIES:
 VERIFIED WELTWISSEN KNOWLEDGE BASE:
 - Company Name: WELTWISSEN Company (WELTWISSEN COMPANY // KSA)
 - Slogan: "World knowledge. Grounded in delivery."
-- Founded: 2018 in Al Khobar, Kingdom of Saudi Arabia.
+- Founded: 2022 in Al Khobar, Kingdom of Saudi Arabia.
 - Headquarters Address: King Abdulaziz Street, Al Khobar, Eastern Province, Kingdom of Saudi Arabia.
 - Email: info@wwtico.com.sa
-- Phone: +966 13 888 2026
+- Phone: +966 13 882 2946
 - Facilities: Laydown yard in Al Khobar, Industrial Fabrication shop, 50+ units Fleet Depot in Eastern Province.
 - Working Hours: Sunday - Thursday: 8:00 AM - 5:00 PM (AST).
 
@@ -102,13 +102,13 @@ function getVerifiedFallbackResponse(inputMessage: string) {
 
   if (query.includes('contact') || query.includes('phone') || query.includes('email') || query.includes('location') || query.includes('address') || query.includes('where') || query.includes('office')) {
     return {
-      reply: "WELTWISSEN Company Headquarters:\n• Address: King Abdulaziz Street, Al Khobar, Kingdom of Saudi Arabia\n• Email: info@wwtico.com.sa\n• Phone: +966 13 888 2026\n• Working Hours: Sunday - Thursday, 8:00 AM - 5:00 PM AST\n\nOur equipment yards and fabrication facilities are located in the Eastern Province."
+      reply: "WELTWISSEN Company Headquarters:\n• Address: King Abdulaziz Street, Al Khobar, Kingdom of Saudi Arabia\n• Email: info@wwtico.com.sa\n• Phone: +966 13 882 2946\n• Working Hours: Sunday - Thursday, 8:00 AM - 5:00 PM AST\n\nOur equipment yards and fabrication facilities are located in the Eastern Province."
     };
   }
 
   if (query.includes('about') || query.includes('who are you') || query.includes('history') || query.includes('company')) {
     return {
-      reply: "WELTWISSEN is a Saudi-based company founded in 2018 in Al Khobar. We deliver specialized construction, equipment rental, and heavy logistics solutions to industrial, infrastructure, and energy-sector clients across the Kingdom of Saudi Arabia."
+      reply: "WELTWISSEN is a Saudi-based company founded in 2022 in Al Khobar. We deliver specialized construction, equipment rental, and heavy logistics solutions to industrial, infrastructure, and energy-sector clients across the Kingdom of Saudi Arabia."
     };
   }
 

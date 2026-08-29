@@ -108,11 +108,11 @@ export const COMPANY_INFO: CompanyInfo = {
   name: "WELTWISSEN",
   tagline: "INDUSTRIAL CONSTRUCTION & LOGISTICS",
   motto: "WORLD KNOWLEDGE · GROUNDED IN DELIVERY",
-  foundedYear: "2018",
+  foundedYear: "2022",
   location: "AL KHOBAR, KINGDOM OF SAUDI ARABIA",
   address: "Al Khobar, Eastern Province, Kingdom of Saudi Arabia",
-  registeredOfficeAddress: "Office 0127, Building 2004, Road 1627, Block 316, Al-Hidd Industrial Area, Kingdom of Bahrain",
-  phone: "+966 13 888 2026",
+  registeredOfficeAddress: "11 King Khaled Street, Al Khobar Al Shamalia, Al Khobar 34427, Saudi Arabia",
+  phone: "+966 13 882 2946",
   email: "info@wwtico.com",
   crNumber: "2051224890",
   vatNumber: "310455829100003",
@@ -120,14 +120,14 @@ export const COMPANY_INFO: CompanyInfo = {
   heroDescription: "WELTWISSEN delivers industrial construction, heavy equipment and project logistics for demanding sites across Saudi Arabia.",
   aboutHeroHeadline: "Precision is our starting point. Delivery is our promise.",
   aboutHeroDescription: "WELTWISSEN is a Saudi-based company delivering industrial construction, heavy equipment rental and project logistics for demanding sites across the Kingdom.",
-  aboutText: "WELTWISSEN is a Saudi-owned multi-discipline contracting firm headquartered in Al Khobar, Saudi Arabia. Since 2018, we have supported critical industrial, energy, and infrastructure development across the Kingdom.",
+  aboutText: "WELTWISSEN is a Saudi-owned multi-discipline contracting firm headquartered in Al Khobar, Saudi Arabia. Since 2022, we have supported critical industrial, energy, and infrastructure development across the Kingdom.",
   ourPromise: "Our promise is simple: deliver what we commit to, protect the people who make it possible, and earn trust with every project we complete.",
   visionText: "To be a dependable partner for industrial construction, equipment and logistics across the Kingdom, supporting the growth and ambition of Saudi Arabia.",
   missionText: "To deliver reliable construction, equipment rental and logistics solutions with a clear focus on quality, safety and disciplined execution.",
   heroImage: "https://images.unsplash.com/photo-1541888946425-d0fbb180c5f5?q=80&w=1200&auto=format&fit=crop",
   social: {
     facebook: "https://facebook.com/weltwissen",
-    instagram: "https://instagram.com/weltwissen",
+    instagram: "https://www.instagram.com/weltwissen.sa?utm_source=qr",
     linkedin: "https://linkedin.com/company/weltwissen"
   }
 };

@@ -33,25 +33,17 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenQ
       <div className="mx-auto flex h-auto min-h-[72px] max-w-[1440px] items-center justify-between px-4 py-3 sm:px-6 sm:py-4 md:px-10 lg:h-[90px] lg:px-[80px] lg:py-[20px] xl:h-[113px] xl:px-[80px] xl:py-[32px]">
         
         {/* Left: Logo */}
-        <button
-          onClick={() => handleNavClick('home')}
-          className="flex items-center gap-2 text-left focus:outline-none cursor-pointer sm:gap-3 lg:gap-2 xl:w-[265px] xl:h-[49px] xl:gap-2 xl:pl-1"
-          aria-label="Go to home"
-        >
-          <img 
-            src="/weltwissen/weltwissen-mark.png" 
-            alt="WELTWISSEN Logo" 
-            className="h-[34px] w-[33px] object-contain shrink-0 sm:h-[38px] sm:w-[36px] lg:h-[38px] lg:w-[36px] xl:h-[44.21px] xl:w-[42.58px]" 
-          />
-          <div className="flex flex-col justify-center">
-            <span className="font-['DM_Serif_Text',serif] text-[14px] leading-[19px] font-normal tracking-[0.04em] text-[#FAF9F5] sm:text-[16px] sm:leading-[22px] xl:text-[18px] xl:leading-[25px]">
-              WELTWISSEN
-            </span>
-            <span className="block font-['Geist_Mono',monospace] text-[7px] leading-[9px] font-normal tracking-[0.1em] text-[#C6A15B] uppercase sm:text-[8px] sm:leading-[10px] sm:tracking-[0.12em]">
-              INDUSTRIAL CONSTRUCTION &amp; LOGISTICS
-            </span>
-          </div>
-        </button>
+     <button
+  onClick={() => handleNavClick('home')}
+  className="flex items-center justify-center focus:outline-none cursor-pointer h-[34px] sm:h-[38px] lg:h-[38px] xl:h-[49px] xl:pl-1"
+  aria-label="Go to home"
+>
+  <img 
+    src="/weltwissen/weltwissen-mark.png" 
+    alt="WELTWISSEN Logo" 
+    className="h-full w-auto object-contain"
+  />
+</button>
 
         {/* Middle: Navigation Links */}
         <nav className="hidden items-center gap-6 lg:flex lg:gap-[24px] xl:gap-[40px]" aria-label="Main navigation">
@@ -108,22 +100,14 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenQ
           <div className="flex h-[66px] w-full items-center justify-between px-5 shrink-0">
             <button
               onClick={() => handleNavClick('home')}
-              className="flex items-center gap-[10px] text-left focus:outline-none cursor-pointer"
+              className="flex items-center justify-center focus:outline-none cursor-pointer h-[34px] sm:h-[38px]"
               aria-label="Go to home"
             >
               <img
                 src="/weltwissen/weltwissen-mark.png"
                 alt="WELTWISSEN Logo"
-                className="h-[28px] w-[27px] object-contain shrink-0"
+                className="h-full w-auto object-contain"
               />
-              <div className="flex flex-col justify-center gap-[1px]">
-                <span className="font-['DM_Serif_Text',serif] text-[15px] leading-[21px] font-normal tracking-[0.04em] text-[#FAF9F5]">
-                  WELTWISSEN
-                </span>
-                <span className="font-['Geist_Mono',monospace] text-[7px] leading-[9px] font-normal tracking-[0.08em] text-[#C6A15B] uppercase">
-                  INDUSTRIAL CONSTRUCTION &amp; LOGISTICS
-                </span>
-              </div>
             </button>
 
             <button

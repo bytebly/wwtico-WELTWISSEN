@@ -249,7 +249,7 @@ export const AboutSection: React.FC = () => {
                   max-sm:leading-[120%]
                 "
               >
-                {COMPANY_INFO.foundedYear || '2018'}
+                {COMPANY_INFO.foundedYear || '2022'}
               </span>
 
             </div>

@@ -25,10 +25,10 @@ interface AboutPageProps {
 // Indices 0-3 are used on mobile, indices 4-7 are used on tablet/desktop,
 // in the same order as ABOUT_VALUES (Integrity, Customer Focus, Quality, Safety).
 const VALUE_ICONS = [
-  '/aboutImage/darkshield.png', //mobile
-  '/aboutImage/darkleaf.png',   //mobile
-  '/aboutImage/mobquality.png',  //mobile
-  '/aboutImage/darkbell.png',   //mobile
+  '/aboutImage/shield.png', //mobile
+  '/aboutImage/lightleaf.png',   //mobile
+  '/aboutImage/tickDesk.png',  //mobile
+  '/aboutImage/bellDesk.png',   //mobile
   '/aboutImage/shield.png',  
   '/aboutImage/lightleaf.png',
   '/aboutImage/tickDesk.png',
@@ -176,9 +176,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenQuote, onTalkToTeam 
   className="bg-white border border-[#D1C9B7] rounded-lg p-6 sm:p-8 lg:p-[48px] flex flex-col gap-4 sm:gap-6 lg:gap-[32px] shadow-sm transition-colors lg:rounded-[8px] lg:border-[#C6A15B] lg:hover:border-[#C6A15B] lg:flex-1 lg:basis-0 lg:min-w-0"
 >
   {/* icon-box */}
-  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded bg-[#C68B59]/15 flex items-center justify-center text-[#C68B59] shrink-0 lg:w-[40px] lg:h-[40px] lg:rounded-[6px] lg:bg-[#C6A15B] lg:text-[#0B211A]">
+  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded lg:rounded-[6px] bg-[#C6A15B] flex items-center justify-center text-[#0B211A] shrink-0 lg:w-[40px] lg:h-[40px]">
     <Target className="w-4 h-4 sm:w-5 sm:h-5 lg:w-[24px] lg:h-[24px]" strokeWidth={2} />
-  </div>
+</div>
 
   {/* label + text frame */}
   <div className="flex flex-col items-start gap-2 sm:gap-3 lg:gap-[16px] lg:w-[528px] lg:max-w-full">

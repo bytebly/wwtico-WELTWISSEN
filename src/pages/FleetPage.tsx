@@ -126,6 +126,26 @@ const cardIconsMap: Record<string, React.FC<IconProps>> = {
   'telehandlers-forklifts': TelehandlerIcon,
 };
 
+/* ----------------------------------------------------------------------
+ * Card icon box sizing
+ * Most category icons are roughly square and read fine inside a fixed
+ * 52x52 box with object-contain. A few source icons (e.g. the flatbed
+ * truck silhouette) are naturally wide and short — squeezing those into
+ * a square box shrinks them down to fit the width, leaving them tiny
+ * and vertically "sunk" with dead space above/below. For those, give
+ * the box a wider, shorter footprint (matching the icon's real Figma
+ * dimensions) so object-contain has the right frame to fill instead of
+ * over-shrinking. Everything not listed here keeps the default 52x52.
+ * Used by both the mobile plain card and the desktop first-row/middle-
+ * grid cards, which share the same square-box icon treatment.
+ * -------------------------------------------------------------------- */
+const cardIconBoxSizeMap: Record<string, { width: number; height: number }> = {
+  'flatbed-lowbed': { width: 96, height: 52 },
+};
+
+const getCardIconBoxSize = (item: FleetCategory) =>
+  cardIconBoxSizeMap[item.id] || { width: 52, height: 52 };
+
 export const FleetPage: React.FC<FleetPageProps> = ({
   onOpenQuote,
   onTalkToTeam,
@@ -142,26 +162,19 @@ export const FleetPage: React.FC<FleetPageProps> = ({
   };
 
   /* --------------------------------------------------------------------
-   * Mobile-only fleet card order — matches the Figma "fleet-stack" frame.
-   * On mobile, Backhoe Loaders & Wheel Loaders become dark image cards
-   * (like the desktop featured card) and Generators & Compressors moves
-   * mid-list as a plain icon card, instead of the desktop grouping.
+   * Mobile-only fleet card order — matches the Figma "fleet-stack" frame
+   * (node 677:3959) exactly: it's just FLEET_CATEGORIES in its natural
+   * order, with only the FIRST (Excavators) and LAST (Generators &
+   * Compressors) items rendered as the dark image-strip card. Every
+   * other item — including Backhoe Loaders & Wheel Loaders — is a plain
+   * light card, same as the desktop middle grid.
    * ------------------------------------------------------------------ */
-  const findMiddle = (id: string) => middleCategories.find((c) => c.id === id);
-  const mobileFleetOrder: { item: FleetCategory | undefined; variant: 'dark' | 'plain' }[] = [
-    { item: featuredCategory, variant: 'dark' },
-    { item: firstRowCategories[0], variant: 'plain' },
-    { item: firstRowCategories[1], variant: 'plain' },
-    { item: findMiddle('bulldozers-loaders'), variant: 'plain' },
-    { item: findMiddle('tankers-water-trucks'), variant: 'plain' },
-    { item: finalCategory, variant: 'plain' },
-    { item: findMiddle('scissors-manlifts'), variant: 'plain' },
-    { item: findMiddle('telehandlers-forklifts'), variant: 'plain' },
-    { item: findMiddle('flatbed-lowbed'), variant: 'plain' },
-    { item: findMiddle('graders-rollers'), variant: 'plain' },
-    { item: findMiddle('backhoe-loaders'), variant: 'dark' },
-    { item: findMiddle('wheel-loaders'), variant: 'dark' },
-  ];
+  const mobileFleetOrder: { item: FleetCategory; variant: 'dark' | 'plain' }[] = FLEET_CATEGORIES.map(
+    (item, index) => ({
+      item,
+      variant: index === 0 || index === FLEET_CATEGORIES.length - 1 ? 'dark' : 'plain',
+    })
+  );
 
   const renderMobilePlainCard = (item: FleetCategory) => (
     <motion.button
@@ -172,38 +185,39 @@ export const FleetPage: React.FC<FleetPageProps> = ({
       viewport={{ once: true }}
       transition={{ duration: 0.35 }}
       onClick={() => onSelectCategory(item)}
-      className="group flex flex-col gap-4 p-5 w-full bg-[#FAF9F5] border border-[#D1C9B7] shadow-[0px_6px_12px_-4px_rgba(0,0,0,0.05)] rounded-xl text-left"
+      className="flex flex-col gap-3 p-4 w-full bg-[#FAF9F5] border border-[#D1C9B7] shadow-[0px_8px_18px_-10px_rgba(0,0,0,0.08)] rounded-xl text-left overflow-hidden"
     >
-      <div className="flex flex-row items-center justify-between w-full">
-        <div className="flex items-center justify-center w-14 h-14">
-          {getCategoryIcon(item)}
-        </div>
-        <span className="px-[10px] py-[4px] text-[9px] leading-[12px] uppercase font-['Geist_Mono',monospace] bg-[#0E2620]/[0.08] rounded-full text-[#0E2620] whitespace-nowrap">
-          {item.badgeTag || item.category || 'Equipment'}
-        </span>
+      <div
+        className="flex items-center"
+        style={{ height: getCardIconBoxSize(item).height, width: getCardIconBoxSize(item).width }}
+      >
+        {getCategoryIcon(item)}
       </div>
-      <div className="flex flex-col gap-1.5">
-        <h3 className="font-['DM_Serif_Text',serif] text-[20px] leading-[130%] text-[#14211D]">
+      <div className="flex flex-col gap-1.5 w-full">
+        <h3 className="font-['DM_Serif_Text',serif] text-[18px] leading-[normal] text-[#0E2620]">
           {item.name}
         </h3>
-        <p className="font-['Geist',sans-serif] text-[13px] leading-[150%] text-[#4A5E59]">
-          {item.description}
-        </p>
+        <span className="font-['Geist_Mono',monospace] text-[12px] text-[#C0913F]">
+          {item.badgeTag || item.category || 'Heavy Machinery'}
+        </span>
       </div>
-      <span className="font-['Geist_Mono',monospace] text-[11px] font-semibold text-[#C0913F]">
-        View models →
-      </span>
+      <p className="font-['Inter',sans-serif] text-[13px] leading-[normal] text-[#595E57] w-full">
+        {item.description}
+      </p>
+      <div className="flex items-center justify-between w-full">
+        <span className="font-['Geist_Mono',monospace] text-[12px] text-[#0E2620] opacity-70">
+          View Equipment →
+        </span>
+      </div>
     </motion.button>
   );
 
   const renderMobileDarkCard = (item: FleetCategory) => {
-    // Backhoe Loaders & Wheel Loaders: show the same single image in all
-    // three slots on mobile (per request), instead of mixing in the
-    // generic construction/equipment filler photos used elsewhere.
-    const sameImageOnly = item.id === 'backhoe-loaders' || item.id === 'wheel-loaders';
-    const stripImages = sameImageOnly
-      ? [item.image, item.image, item.image]
-      : [item.image, item.image2 || '/weltwissen/construction.jpg', item.image3 || '/weltwissen/equipment.jpg'];
+    const stripImages = [
+      item.image,
+      item.image2 || '/weltwissen/construction.jpg',
+      item.image3 || '/weltwissen/equipment.jpg',
+    ];
 
     return (
       <motion.button
@@ -214,9 +228,9 @@ export const FleetPage: React.FC<FleetPageProps> = ({
         viewport={{ once: true }}
         transition={{ duration: 0.35 }}
         onClick={() => onSelectCategory(item)}
-        className="group flex flex-col gap-4 p-5 w-full bg-[#0E2620] border border-[#C6A15B] rounded-xl text-left"
+        className="flex flex-col gap-3 p-4 w-full bg-[#0E2620] border border-[#C0913F] shadow-[0px_8px_18px_-10px_rgba(0,0,0,0.08)] rounded-xl text-left overflow-hidden"
       >
-        <div className="flex flex-row gap-2 p-2 bg-[#0B211A] rounded-[10px] w-full h-[96px]">
+        <div className="flex gap-3 p-2 bg-[#0B1F1A] rounded-[10px] w-full h-[94px]">
           {stripImages.map((src, i) => (
             <div key={i} className="h-full w-full overflow-hidden rounded-md bg-gray-800">
               <img
@@ -227,19 +241,15 @@ export const FleetPage: React.FC<FleetPageProps> = ({
             </div>
           ))}
         </div>
-        <div className="flex flex-col gap-1.5">
-          <div className="flex flex-row items-center justify-between w-full gap-2">
-            <h3 className="font-['DM_Serif_Text',serif] text-[20px] leading-[130%] text-[#FAF9F5]">
-              {item.name}
-            </h3>
-            <span className="px-[10px] py-[4px] text-[9px] leading-[12px] uppercase font-['Geist_Mono',monospace] bg-[#C6A15B] rounded-full text-[#0B211A] whitespace-nowrap">
-              {item.badgeTag || item.category || 'Equipment'}
-            </span>
-          </div>
-          <p className="font-['Geist',sans-serif] text-[13px] leading-[150%] text-[#E5DEC9]">
-            {item.description}
-          </p>
-        </div>
+        <h3 className="font-['DM_Serif_Text',serif] text-[18px] leading-[normal] text-[#E2E4E0]">
+          {item.name}
+        </h3>
+        <p className="font-['Inter',sans-serif] text-[13px] leading-[normal] text-[#E2E4E0] w-full">
+          {item.description}
+        </p>
+        <span className="font-['Geist_Mono',monospace] font-bold text-[12px] text-[#C0913F]">
+          View Equipment →
+        </span>
       </motion.button>
     );
   };
@@ -284,7 +294,7 @@ export const FleetPage: React.FC<FleetPageProps> = ({
           {/* ===== Mobile-only fleet stack (below sm) ===== */}
           <div className="flex sm:hidden flex-col gap-5 w-full">
             {mobileFleetOrder.map(({ item, variant }) =>
-              item ? (variant === 'dark' ? renderMobileDarkCard(item) : renderMobilePlainCard(item)) : null
+              variant === 'dark' ? renderMobileDarkCard(item) : renderMobilePlainCard(item)
             )}
           </div>
 
@@ -351,9 +361,12 @@ export const FleetPage: React.FC<FleetPageProps> = ({
                   onClick={() => onSelectCategory(item)}
                   className="group flex flex-col gap-3 p-5 w-full lg:flex-[256_256_0%] lg:min-w-0 min-h-[260px] sm:min-h-[314px] bg-[#FAF9F5] border border-[#D1C9B7] shadow-md rounded-xl text-left transition-all duration-200 hover:bg-[#0E2620] hover:border-[#C6A15B] hover:-translate-y-0.5 hover:shadow-[0px_10px_22px_-10px_rgba(0,0,0,0.12)]"
                 >
-                  <div className="flex items-center justify-center w-12 h-12 sm:w-[52px] sm:h-[52px] bg-[#FAF6EE] rounded group-hover:bg-transparent group-hover:border-transparent transition-colors">
-  {getCategoryIcon(item)}
-</div>
+                  <div
+                    className="flex items-center justify-center bg-[#FAF6EE] rounded group-hover:bg-transparent group-hover:border-transparent transition-colors"
+                    style={{ width: getCardIconBoxSize(item).width, height: getCardIconBoxSize(item).height }}
+                  >
+                    {getCategoryIcon(item)}
+                  </div>
                   <div className="flex flex-col gap-1">
                     <h3 className="font-['DM_Serif_Text',serif] text-lg text-[#0E2620] group-hover:text-white transition-colors">
                       {item.name}
@@ -385,9 +398,12 @@ export const FleetPage: React.FC<FleetPageProps> = ({
                   onClick={() => onSelectCategory(item)}
                   className="group flex flex-col gap-3 p-5 w-full min-h-[240px] sm:min-h-[280px] bg-[#FAF9F5] border border-[#D1C9B7] shadow-md rounded-xl text-left transition-all duration-200 hover:bg-[#0E2620] hover:border-[#C6A15B] hover:-translate-y-0.5 hover:shadow-[0px_10px_22px_-10px_rgba(0,0,0,0.12)]"
                 >
-                  <div className="flex items-center justify-center w-12 h-12 sm:w-[52px] sm:h-[52px] bg-[#FAF6EE] rounded group-hover:bg-transparent group-hover:border-transparent transition-colors">
-  {getCategoryIcon(item)}
-</div>
+                  <div
+                    className="flex items-center justify-center bg-[#FAF6EE] rounded group-hover:bg-transparent group-hover:border-transparent transition-colors"
+                    style={{ width: getCardIconBoxSize(item).width, height: getCardIconBoxSize(item).height }}
+                  >
+                    {getCategoryIcon(item)}
+                  </div>
                   <div className="flex flex-col gap-1">
                     <h3 className="font-['DM_Serif_Text',serif] text-lg text-[#0E2620] group-hover:text-white transition-colors">
                       {item.name}
@@ -633,7 +649,7 @@ export const FleetPage: React.FC<FleetPageProps> = ({
 
             <button
               onClick={onTalkToTeam}
-              className="flex md:hidden w-full sm:w-auto justify-center h-11 items-center gap-2 border border-[#0B211A] bg-[#C6A15B] px-3.5 py-3.5 font-['Geist_Mono',monospace] text-xs font-semibold uppercase text-[#0B211A] transition-colors duration-300 hover:bg-[#0B211A] hover:text-white hover:border-[#0B211A]"
+              className="flex md:hidden w-full sm:w-auto justify-center h-11 items-center gap-2 bg-[#C6A15B] px-3.5 py-3.5 font-['Geist_Mono',monospace] text-xs font-semibold uppercase text-[#0B211A] transition-colors duration-300 hover:bg-[#0B211A] hover:text-white"
             >
               Talk to Our Team
               <svg
