@@ -34,7 +34,7 @@ VERIFIED WELTWISSEN KNOWLEDGE BASE:
 - Founded: 2022 in Al Khobar, Kingdom of Saudi Arabia.
 - Headquarters Address: King Abdulaziz Street, Al Khobar, Eastern Province, Kingdom of Saudi Arabia.
 - Email: info@wwtico.com.sa
-- Phone: +966 13 882 2946
+- Phone: 0138822946
 - Facilities: Laydown yard in Al Khobar, Industrial Fabrication shop, 50+ units Fleet Depot in Eastern Province.
 - Working Hours: Sunday - Thursday: 8:00 AM - 5:00 PM (AST).
 
@@ -102,7 +102,7 @@ function getVerifiedFallbackResponse(inputMessage: string) {
 
   if (query.includes('contact') || query.includes('phone') || query.includes('email') || query.includes('location') || query.includes('address') || query.includes('where') || query.includes('office')) {
     return {
-      reply: "WELTWISSEN Company Headquarters:\n• Address: King Abdulaziz Street, Al Khobar, Kingdom of Saudi Arabia\n• Email: info@wwtico.com.sa\n• Phone: +966 13 882 2946\n• Working Hours: Sunday - Thursday, 8:00 AM - 5:00 PM AST\n\nOur equipment yards and fabrication facilities are located in the Eastern Province."
+      reply: "WELTWISSEN Company Headquarters:\n• Address: King Abdulaziz Street, Al Khobar, Kingdom of Saudi Arabia\n• Email: info@wwtico.com.sa\n• Phone: 0138822946\n• Working Hours: Sunday - Thursday, 8:00 AM - 5:00 PM AST\n\nOur equipment yards and fabrication facilities are located in the Eastern Province."
     };
   }
 

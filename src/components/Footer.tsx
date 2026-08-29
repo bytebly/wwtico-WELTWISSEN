@@ -111,7 +111,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick }) => {
               </span>
 
               <p className="font-['Geist',sans-serif] font-normal text-[14px] sm:text-[15px] leading-[150%] text-[#E5DEC9]">
-                Office 5127, Building 2004, Road 1527, Block 1115, Al Hidd Industrial Area, Kingdom of Bahrain
+                11 King Khaled Street, Al Khobar Al Shamalia, Al Khobar 34427, Saudi Arabia
               </p>
 
               <div className="flex flex-col items-start gap-[8px] pt-1 font-['Geist_Mono',monospace] text-[13px] sm:text-[14px] leading-[18px] break-all sm:break-normal">
@@ -125,7 +125,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick }) => {
                   href={`tel:${COMPANY_INFO?.phone || '+966138882026'}`}
                   className="hover:text-[#C6A15B] transition-colors"
                 >
-                  T: {COMPANY_INFO?.phone || '+966 13 882 2946'}
+                  T: {COMPANY_INFO?.phone || '0138822946'}
                 </a>
               </div>
             </div>

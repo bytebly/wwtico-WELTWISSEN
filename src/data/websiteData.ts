@@ -112,7 +112,7 @@ export const COMPANY_INFO: CompanyInfo = {
   location: "AL KHOBAR, KINGDOM OF SAUDI ARABIA",
   address: "Al Khobar, Eastern Province, Kingdom of Saudi Arabia",
   registeredOfficeAddress: "11 King Khaled Street, Al Khobar Al Shamalia, Al Khobar 34427, Saudi Arabia",
-  phone: "+966 13 882 2946",
+  phone: "0138822946",
   email: "info@wwtico.com",
   crNumber: "2051224890",
   vatNumber: "310455829100003",

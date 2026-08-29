@@ -20,11 +20,16 @@ import { SITE_URL, DEFAULT_OG_IMAGE, getSeoForPath } from './seoConfig';
 export function App() {
   const location = useLocation();
   const navigate = useNavigate();
+
+   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   // Derived from the URL so every page has its own real address (/, /services, ...)
   const activeTab = location.pathname === '/' ? 'home' : location.pathname.replace(/^\//, '');
   const handleNavigateTab = (tab: string) => {
     navigate(tab === 'home' ? '/' : `/${tab}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const seo = getSeoForPath(location.pathname);
