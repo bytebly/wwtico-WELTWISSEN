@@ -26,8 +26,8 @@ const sectorIcons: Record<string, LucideIcon> = {
 
 export const SectorsSection: React.FC<SectorsSectionProps> = () => {
   return (
-    <section className="w-full bg-[#FAF9F5] py-16 md:py-[120px] px-6 md:px-12 lg:px-[80px] border-b border-[#D1C9B7]">
-      <div className="max-w-[1280px] mx-auto flex flex-col gap-12 md:gap-[64px]">
+    <section className="w-full bg-[#FAF9F5] py-14 md:py-[120px] px-5 md:px-12 lg:px-[80px] border-b border-[#D1C9B7]">
+      <div className="max-w-[1280px] mx-auto flex flex-col gap-8 md:gap-[64px]">
         
         {/* Section Header */}
         <div className="flex flex-col gap-[16px] max-w-[1280px]">
@@ -40,7 +40,7 @@ export const SectorsSection: React.FC<SectorsSectionProps> = () => {
           </div>
 
           {/* Heading */}
-          <h2 className="font-['DM_Serif_Text',serif] text-[#0E2620] text-3xl sm:text-4xl lg:text-[44px] leading-[115%] font-normal">
+          <h2 className="font-['DM_Serif_Text',serif] text-[#0E2620] text-[28px] sm:text-4xl lg:text-[44px] leading-[115%] font-normal">
             Industries we support.
           </h2>
 
@@ -58,7 +58,7 @@ export const SectorsSection: React.FC<SectorsSectionProps> = () => {
             return (
               <div
                 key={sector.id}
-                className="bg-[#F5EFE2] border border-[#D1C9B7] rounded-[16px] p-[20px] flex flex-col justify-between h-auto min-h-[343px] gap-[12px]"
+                className="bg-[#FAF9F5] md:bg-[#F5EFE2] border border-[#D1C9B7] rounded-[16px] p-[20px] flex flex-col justify-between h-auto min-h-0 md:min-h-[343px] gap-[12px]"
               >
                 {/* Content Top */}
                 <div className="flex flex-col gap-[12px]">
@@ -76,7 +76,7 @@ export const SectorsSection: React.FC<SectorsSectionProps> = () => {
                   </h3>
 
                   {/* Sector Description */}
-                  <p className="font-['Geist',sans-serif] text-[#4A5E59] text-[14px] leading-[160%] font-normal min-h-[44px]">
+                  <p className="font-['Geist',sans-serif] text-[#4A5E59] text-[14px] leading-[160%] font-normal min-h-0 md:min-h-[44px]">
                     {sector.description}
                   </p>
                 </div>

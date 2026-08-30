@@ -40,7 +40,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       <AboutSection/>
 
       {/* 03 // FLEET & EQUIPMENT — hidden on mobile per mobile spec, unchanged on tablet/desktop */}
-      <div className="max-sm:hidden">
+      <div> // className="max-sm:hidden" use this to hide in mobile 
         <FleetSection 
           onViewFleet={() => onNavigate('fleet')}
           onSelectCategory={onSelectCategory}
@@ -48,7 +48,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </div>
 
       {/* 04 // INDUSTRIES WE SERVE — hidden on mobile per mobile spec, unchanged on tablet/desktop */}
-      <div className="max-sm:hidden">
+      <div>
         <SectorsSection 
           onSelectSector={(sec) => {
             onSelectSector(sec);
